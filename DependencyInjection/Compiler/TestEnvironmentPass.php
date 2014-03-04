@@ -1,6 +1,6 @@
 <?php
 
-namespace Infinity\Cms\Bundle\TestBundle\DependencyInjection\Compiler;
+namespace Infinity\Bundle\TestBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
