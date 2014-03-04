@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('infinity_test');
+        $rootNode    = $treeBuilder->root('infinity_test');
 
         $rootNode
             ->fixXmlConfig('substitution')
@@ -27,9 +27,12 @@ class Configuration implements ConfigurationInterface
                     ->defaultFalse()
                 ->end()
                 ->arrayNode('substitutions')
-                    ->canbeEnabled()
                     ->useAttributeAsKey('service')
                     ->prototype('array')
+                        ->beforeNormalization()
+                            ->ifString()
+                            ->then(function($v) { return array('class'=> $v); })
+                        ->end()
                         ->children()
                             ->scalarNode('class')->isRequired()->end()
                             ->booleanNode('inherit_arguments')->defaultTrue()->end()
