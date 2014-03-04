@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('class')->isRequired()->end()
-                            ->boolean('inherit_arguments')->defaultTrue()->end()
+                            ->booleanNode('inherit_arguments')->defaultTrue()->end()
                         ->end()
                     ->end()
                 ->end()
