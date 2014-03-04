@@ -20,9 +20,24 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('infinity_test');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->fixXmlConfig('substitution')
+            ->children()
+                ->booleanNode('enabled')
+                    ->defaultFalse()
+                ->end()
+                ->arrayNode('substitutions')
+                    ->canbeEnabled()
+                    ->useAttributeAsKey('service')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('class')->isRequired()->end()
+                            ->boolean('inherit_arguments')->defaultTrue()->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
