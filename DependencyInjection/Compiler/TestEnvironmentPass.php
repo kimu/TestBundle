@@ -17,16 +17,18 @@ class TestEnvironmentPass implements CompilerPassInterface
         if ($container->getParameter('kernel.environment') == 'test') {
             // Checks if substitutions has been configured and proceeds with the substitution
             if ($container->has('infinity_test.substitutions')) {
-                foreach($container->get('infinity_test.substitutions') as $service => $config) {
+                foreach($container->get('infinity_test.substitutions') as $substitution) {
+                    // Extracts the name of the service
+                    $service = array_keys($substitution)[0];
                     if ($container->hasDefinition($service)) {
                         $definition = $container->getDefinition($service);
 
                         // Normalize the class name
-                        $class = preg_replace('/(\/\/|\/)/', '\\\\\\\\', $config['class']);
+                        $class = preg_replace('/(\/\/|\/|\\\)/', '\\\\', $substitution[$service]['class']);
                         $definition->setClass($class);
 
                         // If requested remove all arguments
-                        if (! $config['inherit_arguments']) {
+                        if (false === $substitution[$service]['inherit_arguments']) {
                             $definition->setArguments([]);
                         }
 
