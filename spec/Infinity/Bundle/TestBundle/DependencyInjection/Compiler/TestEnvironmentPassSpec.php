@@ -43,7 +43,7 @@ class TestEnvironmentPassSpec extends ObjectBehavior
         $this->process($containerBuilder);
     }
 
-    function it_should_attempt_to_replace_services_if_substitutions_is_not_empty_and_services_are_existing(ContainerBuilder $containerBuilder, Definition $service1Definition)
+    function it_should_replace_services_if_substitutions_is_not_empty_and_services_are_existing(ContainerBuilder $containerBuilder, Definition $service1Definition)
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
         $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
@@ -57,7 +57,7 @@ class TestEnvironmentPassSpec extends ObjectBehavior
         $this->process($containerBuilder);
     }
 
-    function it_should_not_attempt_to_replace_services_if_services_are_not_existing(ContainerBuilder $containerBuilder)
+    function it_should_not_replace_services_if_services_are_not_existing(ContainerBuilder $containerBuilder)
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
         $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
