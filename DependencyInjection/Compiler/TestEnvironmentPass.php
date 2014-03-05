@@ -19,7 +19,6 @@ class TestEnvironmentPass implements CompilerPassInterface
                 // Extracts the name of the service
                 $service = array_keys($substitution)[0];
                 if ($container->hasDefinition($service)) {
-                    
                     $definition = $container->getDefinition($service);
 
                     // Normalize the class name
