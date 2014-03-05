@@ -22,12 +22,9 @@ class InfinityTestExtension extends Extension
         $configuration = new Configuration();
         $config        = $this->processConfiguration($configuration, $configs);
 
-        if (true === $config['enabled']) {
-            $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-            $loader->load('services.yml');
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
 
-            $container->setParameter('infinity_test.substitutions', $config['substitutions']);
-        }
-
+        $container->setParameter('infinity_test.substitutions', $config['substitutions']);
     }
 }

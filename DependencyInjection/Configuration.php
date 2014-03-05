@@ -23,9 +23,6 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->fixXmlConfig('substitution')
             ->children()
-                ->booleanNode('enabled')
-                    ->defaultFalse()
-                ->end()
                 ->arrayNode('substitutions')
                     ->info('Substitutions definitions')
                     ->useAttributeAsKey('service')
