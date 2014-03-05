@@ -6,16 +6,16 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Replaces service specified in the bundle config
+ * Replaces services classes as specified in the bundle config
  *
  */
 class TestEnvironmentPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        // This compiler pass acts only if in the test environment
+        // This compiler pass acts only in the test environment
         if ($container->getParameter('kernel.environment') == 'test') {
-            // check if substitutions has been configured and proceed with the substitution
+            // Checks if substitutions has been configured and proceeds with the substitution
             if ($container->has('infinity_test.substitutions')) {
                 foreach($container->get('infinity_test.substitutions') as $service => $config) {
                     if ($container->hasDefinition($service)) {
