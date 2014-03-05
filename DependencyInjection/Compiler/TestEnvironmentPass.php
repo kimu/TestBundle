@@ -17,7 +17,7 @@ class TestEnvironmentPass implements CompilerPassInterface
         if ($container->getParameter('kernel.environment') == 'test') {
             // Checks if substitutions has been configured and proceeds with the substitution
             if ($container->has('infinity_test.substitutions')) {
-                foreach($container->get('infinity_test.substitutions') as $substitution) {
+                foreach ($container->get('infinity_test.substitutions') as $substitution) {
                     // Extracts the name of the service
                     $service = array_keys($substitution)[0];
                     if ($container->hasDefinition($service)) {
