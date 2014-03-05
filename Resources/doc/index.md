@@ -2,15 +2,7 @@
 
 The aim of the Infinity Test Bundle is to provide a ready to use testing environment based on Behat, Mink, Phpspec and Selenium.
 
-## Activating and configuring the bundle
-
-Once installed the Infinity Test Bundle can be activated adding the following lines to your config.yml file.
-
-```yaml
-infinity_test:
-    enabled: true
-```
-
+## Configuring the bundle
 ### Configuring services substitutions
 
 The Infinity Test Bundle allows to replace services in the test environment. This can be very useful to replace elements that cannot be
@@ -22,7 +14,6 @@ The `substitutions` key in the configuration of the bundle is used to list all s
 
 ```yaml
 infinity_test:
-    ...
     substitutions:
         servicename: { class: 'namespace\of\the\class', inherit_arguments: true }
 ```
