@@ -25,13 +25,13 @@ and run
 The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
 
 ### Post installation
-After the installation you should copy `phpspec.yml` and `behat.yml` in the root of your project if you don't have these files already.    
-You can find these files under the Test folder in the bundle root.    
+After the installation you should copy `phpspec.yml` and `behat.yml` in the root of your project if you don't have these files already.
+You can find these files under the Test folder in the bundle root.
 
 These files comes with common configurations for both bundles, but you can of course change them to suit your needs.
 
-If you haven't already, init `Behat` typing `bin/behat --init` from the root of your project. Doing so you will create a folder 
-called `features` under the root of your project. That folder is where you have to save all behat files (features, contexts and bootstrap files). 
+If you haven't already, init `Behat` typing `bin/behat --init` from the root of your project. Doing so you will create a folder
+called `features` under the root of your project. That folder is where you have to save all behat files (features, contexts and bootstrap files).
 
 ## Configuring the bundle
 ### Configuring services substitutions
@@ -59,3 +59,13 @@ If you don't need to change the value of `inherit_arguments` you can define subs
     substitutions:
         servicename: 'namespace\of\the\class'
 ```
+
+## Utilities
+The Infinity Test Bundle installs 3 files under the bin folder of your project.    
+Files are:
+
+* `start_selenium.sh` which starts Xvfb and Selenium2
+* `stop_selenium.sh` which stops Xvfb and Selenium2
+* `run_test.sh` which start and stop Xvfb and Selenium and run all Behat and Phpspec test in your project.
+
+It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `source bin/run_test.sh` otherwise part of what the script does won't be correctly executed.
