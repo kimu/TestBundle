@@ -2,6 +2,37 @@
 
 The aim of the Infinity Test Bundle is to provide a ready to use testing environment based on Behat, Mink, Phpspec and Selenium.
 
+## Install the bundle
+> Infinity Test Bundle requires `Xvfb` and `Selenium2` to be installed in the system before installing the bundle.
+ In order to install `Selenium2` and `Xvfb` in you system run `yum install selenium` in a terminal before using this bundle.
+
+In order to install the bundle in your project you must add a line in your composer.json
+
+```json
+{
+    "require": {
+        "infinitytracking/test-bundle": "*"
+    }
+}
+```
+
+and run
+
+```sh
+./composer.phar update infinitytracking/test-bundle
+```
+
+The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
+
+### Post installation
+After the installation you should copy `phpspec.yml` and `behat.yml` in the root of your project if you don't have these files already.    
+You can find these files under the Test folder in the bundle root.    
+
+These files comes with common configurations for both bundles, but you can of course change them to suit your needs.
+
+If you haven't already, init `Behat` typing `bin/behat --init` from the root of your project. Doing so you will create a folder 
+called `features` under the root of your project. That folder is where you have to save all behat files (features, contexts and bootstrap files). 
+
 ## Configuring the bundle
 ### Configuring services substitutions
 
