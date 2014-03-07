@@ -3,8 +3,16 @@
 The aim of the Infinity Test Bundle is to provide a ready to use testing environment based on Behat, Mink, Phpspec and Selenium.
 
 ## Install the bundle
-> Infinity Test Bundle requires `Xvfb` and `Selenium2` to be installed in the system before installing the bundle.
- In order to install `Selenium2` and `Xvfb` in you system run `yum install selenium` in a terminal before using this bundle.
+<hr />
+ Infinity Test Bundle requires `Xvfb` and `Selenium2` to be installed in the system before installing the bundle.
+ In order to install `Selenium2` and `Xvfb` in you system run 
+ 
+```sh
+yum install selenium
+```
+
+ in a terminal before using this bundle.
+ <hr />
 
 In order to install the bundle in your project you must add a line in your composer.json
 
