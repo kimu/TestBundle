@@ -69,3 +69,7 @@ Files are:
 * `run_test.sh` which start and stop Xvfb and Selenium and run all Behat and Phpspec test in your project.
 
 It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `source bin/run_test.sh` otherwise part of what the script does won't be correctly executed.
+
+<hr />
+# Further readings
+[Howto create phpsepc tests](howto_create_phpspec_tests.md)
