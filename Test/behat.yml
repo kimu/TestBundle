@@ -1,0 +1,17 @@
+default:
+    paths:
+        features: features
+        bootstrap: %behat.paths.features%/boostrap
+    formatter:
+        name: pretty
+    extensions:
+        Behat\MinkExtension\Extension:
+            goutte:    ~
+            selenium2: ~
+            default_session: goutte
+            javascript_session: selenium2
+            browser_name: firefox
+
+        Behat\Symfony2Extension\Extension:
+            mink_driver: true
+

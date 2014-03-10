@@ -80,4 +80,5 @@ It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `sourc
 
 <hr />
 # Further readings
-[Howto create phpsepc tests](howto_create_phpspec_tests.md)
+[Howto create phpsepc tests](howto_create_phpspec_tests.md)   
+[Configure Behat](configure_behat.md)

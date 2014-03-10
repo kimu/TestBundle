@@ -8,6 +8,9 @@
 HTTPSPROXY=$https_proxy
 HTTPPROXY=$http_proxy
 
+# Set the base url for the Behat Mink Extension
+export BEHAT_PARAMS=extensions[Behat\\MinkExtension\\Extension][base_url]=http://ict-portal2.${HOSTNAME}
+
 unset https_proxy ;
 unset http_proxy ;
 rm -rf app/cache/test/* ;
@@ -20,3 +23,4 @@ php -d memory_limit=128M bin/phpspec ;
 bin/stop_selenium.sh ;
 export https_proxy=$HTTPSPROXY ;
 export http_proxy=$HTTPPROXY
+
