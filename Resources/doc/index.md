@@ -33,13 +33,12 @@ and run
 The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
 
 ### Post installation
-After the installation you should copy `phpspec.yml` and `behat.yml` in the root of your project if you don't have these files already.
-You can find these files under the Test folder in the bundle root.
+TestBundle provides basic configuration files for phpspec and behat. After the installation you can copy `phpspec.yml.dist` and `behat.yml.dist` in the `app/config` folder of your project and make a copy of them in the root of your project renaming the files respectively `phpspec.yml` and `behat.yml`.  
+You can find the `.yml.dist` files under the `Test` folder in the bundle root.
 
 These files comes with common configurations for both bundles, but you can of course change them to suit your needs.
 
-If you haven't already, init `Behat` typing `bin/behat --init` from the root of your project. Doing so you will create a folder
-called `features` under the root of your project. That folder is where you have to save all behat files (features, contexts and bootstrap files).
+If you haven't already, init `Behat` typing `bin/behat --init` from the root of your project. Doing so you will create a folder called `features` under the root of your project. That folder is where you have to save all behat files (features, contexts and bootstrap files).
 
 ## Configuring the bundle
 ### Configuring services substitutions

@@ -1,17 +1,19 @@
 default:
     paths:
         features: features
-        bootstrap: %behat.paths.features%/boostrap
+        bootstrap: %behat.paths.features%/bootstrap
     formatter:
         name: pretty
     extensions:
         Behat\MinkExtension\Extension:
+            base_url: 'http://your.local.address'
             goutte:    ~
             selenium2: ~
             default_session: goutte
             javascript_session: selenium2
             browser_name: firefox
 
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
+# Read the documention on http://extensions.behat.org/symfony2/index.html if you want to use the Symfony2 extension
+#        Behat\Symfony2Extension\Extension:
+#            mink_driver: true
 
