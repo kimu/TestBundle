@@ -33,15 +33,15 @@ class ScriptHandler
             if (is_file('bin/behat')) {
                 system('bin/behat --init');
                 //Check that everything is correct before replacing FeatureContext.php
-                if (is_dir('features') && is_dir('features/boostrap')) {
+                if (is_dir('features') && is_dir('features/bootstrap')) {
                     copy(__DIR__.'/../Test/Context/FeatureContext.php', 'features/bootstrap/FeatureContext.php');
                 } else {
-                    echo 'Initialization of Behat failed, can not replace FeatureContext.php';
+                    echo 'Initialization of Behat failed, can not replace FeatureContext.php'.PHP_EOL;
 
                     return;
                 }
             } else {
-                echo 'Behat has not been found in '.getcwd().'/bin/behat, can not initialize Behat';
+                echo 'Behat has not been found in '.getcwd().'/bin/behat, can not initialize Behat'.PHP_EOL;
 
                 return;
             }
