@@ -20,7 +20,7 @@ class ScriptHandler
         if (!is_file($appDir.'/config/behat.yml.dist')) {
             copy(__DIR__.'/../Test/config/behat.yml.dist', $appDir.'/config/behat.yml.dist');
         }
-        if (!is_file(($appDir.'/../config/phpspec.yml.dist'))) {
+        if (!is_file(($appDir.'/config/phpspec.yml.dist'))) {
             copy(__DIR__.'/../Test/config/phpspec.yml.dist', $appDir.'/config/phpspec.yml.dist');
         }
     }
