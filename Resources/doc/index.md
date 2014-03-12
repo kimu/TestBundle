@@ -14,31 +14,35 @@ yum install selenium
  in a terminal before using this bundle.
  <hr />
 
-In order to install the bundle in your project you must add a line in your composer.json
+In order to install the bundle in your project you must add a few lines in your composer.json
 
 ```json
 {
     "require": {
         "infinitytracking/test-bundle": "*"
     }
+    ...
+    "scripts": {
+        "post-install-cmd": [
+      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles
+      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat
+        ]
+    },
 }
 ```
 
-and run
+The first post install script install behat.yml.dist and phpspec.yml.dist under you `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
+The second post install script init Behat for you and replace FeatureContext.php with a version of the class that make use of Mink.
+
+The order of the two script is important, so it has to be kept as for the example, and it's also important that these script run before the Incenteev\ParameterHandler bundle, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).
+
+Finally, install the bundle typing this in a terminal
 
 ```sh
 ./composer.phar update infinitytracking/test-bundle
 ```
 
 The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
-
-### Post installation
-TestBundle provides basic configuration files for phpspec and behat. After the installation you can copy `phpspec.yml.dist` and `behat.yml.dist` in the `app/config` folder of your project and make a copy of them in the root of your project renaming the files respectively `phpspec.yml` and `behat.yml`.  
-You can find the `.yml.dist` files under the `Test` folder in the bundle root.
-
-These files comes with common configurations for both bundles, but you can of course change them to suit your needs.
-
-If you haven't already, init `Behat` typing `bin/behat --init` from the root of your project. Doing so you will create a folder called `features` under the root of your project. That folder is where you have to save all behat files (features, contexts and bootstrap files).
 
 ## Configuring the bundle
 ### Configuring services substitutions
