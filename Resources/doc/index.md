@@ -24,12 +24,12 @@ In order to install the bundle in your project you must add a few lines in your 
     ...
     "scripts": {
         "post-install-cmd": [
-      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles
-      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat
+      		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles",
+      		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat"
         ],
         "post-update-cmd": [
-      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles
-      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat
+      		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles",
+      		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat"
         ]
     },
 }
