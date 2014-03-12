@@ -37,9 +37,13 @@ class ScriptHandler
                     copy(__DIR__.'/../Test/Context/FeatureContext.php', 'features/bootstrap/FeatureContext.php');
                 } else {
                     echo 'Initialization of Behat failed, can not replace FeatureContext.php';
+
+                    return;
                 }
             } else {
                 echo 'Behat has not been found in '.getcwd().'/bin/behat, can not initialize Behat';
+
+                return;
             }
         }
     }

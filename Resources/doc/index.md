@@ -26,6 +26,10 @@ In order to install the bundle in your project you must add a few lines in your 
         "post-install-cmd": [
       		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles
       		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat
+        ],
+        "post-update-cmd": [
+      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles
+      		Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat
         ]
     },
 }
@@ -34,7 +38,7 @@ In order to install the bundle in your project you must add a few lines in your 
 The first post install script install behat.yml.dist and phpspec.yml.dist under you `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
 The second post install script init Behat for you and replace FeatureContext.php with a version of the class that make use of Mink.
 
-The order of the two script is important, so it has to be kept as for the example, and it's also important that these script run before the Incenteev\ParameterHandler bundle, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).
+The order of the two script is important, so it has to be kept as for the example, and it's also important that these script run before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).
 
 Finally, install the bundle typing this in a terminal
 

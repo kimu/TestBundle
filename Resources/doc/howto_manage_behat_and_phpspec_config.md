@@ -36,4 +36,4 @@ Which will do the job for you.
 
 Once copied you just need to change values accordingly to your local dev environment.
 
-If you added the previous line to composer.json before creating `phpspec.yml` and `behat.yml` you will get those file created and populated for you for free.
+If you added the previous line to composer.json before creating `phpspec.yml` and `behat.yml` you will get those file created and populated for free.
