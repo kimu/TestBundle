@@ -37,10 +37,10 @@ In order to install the bundle in your project you must add a few lines in your 
 }
 ```
 
-The first post install script install behat.yml.dist and phpspec.yml.dist under you `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
-The second post install script init Behat for you and replace FeatureContext.php with a version of the class that make use of Mink.
+The first post install script installs behat.yml.dist and phpspec.yml.dist under your `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
+The second post install script initialises Behat for you and replaces FeatureContext.php with a version of the class that makes use of Mink.
 
-The order of the two script is important. The first script must be the first script in the list and at least before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).  
+The order of the two scripts is important. The first script must be the first script in the list and must be before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).  
 The second script must be the last script in the list.
 
 Finally, install the bundle typing this in a terminal
