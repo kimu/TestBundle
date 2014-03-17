@@ -1,14 +1,10 @@
 <?php
 
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
+use Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
-
 //
 // Require 3rd-party libraries here:
 //
@@ -30,5 +26,15 @@ class FeatureContext extends RawMinkContext
     public function __construct(array $parameters)
     {
         $this->useContext('mink', new MinkContext);
+
+        // Loads all php files under features/bootstrap iterating nested folder
+        $iterator = new RecursiveDirectoryIterator(__DIR__);
+        while ($iterator->valid()) {
+            $file = $iterator->current();
+            if (!$file->isDir() && __CLASS__ != $class = $file->getBasename('.php')) {
+                $this->useContext($class, new $class($parameters));
+            }
+            $iterator->next();
+        }
     }
 }
