@@ -31,7 +31,7 @@ class FeatureContext extends RawMinkContext
         // Loads all php files under features/bootstrap iterating nested folder
         $finder = new Finder();
         $finder->files('*.php')->in(__DIR__);
-        foreach($finder as $file) {
+        foreach ($finder as $file) {
             if (__CLASS__ != $class = $file->getBasename('.php')) {
                 $this->useContext($class, new $class($parameters));
             }
