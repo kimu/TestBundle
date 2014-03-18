@@ -5,6 +5,7 @@ use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
+use Symfony\Component\Finder\Finder;
 //
 // Require 3rd-party libraries here:
 //
@@ -28,13 +29,12 @@ class FeatureContext extends RawMinkContext
         $this->useContext('mink', new MinkContext);
 
         // Loads all php files under features/bootstrap iterating nested folder
-        $iterator = new RecursiveDirectoryIterator(__DIR__);
-        while ($iterator->valid()) {
-            $file = $iterator->current();
-            if (!$file->isDir() && __CLASS__ != $class = $file->getBasename('.php')) {
+        $finder = new Finder();
+        $finder->files('*.php')->in(__DIR__);
+        foreach($finder as $file) {
+            if (__CLASS__ != $class = $file->getBasename('.php')) {
                 $this->useContext($class, new $class($parameters));
             }
-            $iterator->next();
         }
     }
 }
