@@ -5,6 +5,9 @@ use Behat\Gherkin\Node\PyStringNode,
     Behat\Behat\Event\StepEvent;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
+use Behat\CommonContexts\MinkExtraContext,
+    Behat\CommonContexts\MinkRedirectContext,
+    Behat\CommonContexts\SymfonyMailerContext;
 use Symfony\Component\Finder\Finder;
 
 //
@@ -28,6 +31,10 @@ class FeatureContext extends RawMinkContext
     public function __construct(array $parameters)
     {
         $this->useContext('mink', new MinkContext);
+        $this->useContext('mink_extra', new MinkExtraContext());
+        $this->useContext('mink_redirect', new MinkRedirectContext());
+        $this->useContext('symfony_mailer', new SymfonyMailerContext());
+
 
         // Loads all php files under features/bootstrap iterating nested folder
         $finder = new Finder();
