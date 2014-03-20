@@ -58,10 +58,12 @@ class FeatureContext extends RawMinkContext
             $file       = sys_get_temp_dir().'/firefox_'.date('Ymd_His').'.png';
             file_put_contents($file, $screenshot);
 
-            $body = 'Screenshot of failing step: '.$event->getStep()->getText();
+            $body    = 'Screenshot of failing step: '.$event->getStep()->getText();
+            $subject = 'Failing step: '.$event->getStep()->getText();
 
             if (false !== getenv('TRAVIS')) {
-                $body .= PHP_EOL.
+                $subject = 'TravisCI '.$subject;
+                $body   .= PHP_EOL.
                     'Branch: '.getenv('TRAVIS_BRANCH').PHP_EOL.
                     'Commit: '.getenv('TRAVIS_COMMIT').PHP_EOL.
                     'Pull Request: '.getenv('TRAVIS_PULL_REQUEST').PHP_EOL.
@@ -71,7 +73,7 @@ class FeatureContext extends RawMinkContext
 
             // Send the email with the screenshot attached
             $message = \Swift_Message::newInstance()
-                ->setSubject('Failing step: '.$event->getStep()->getText())
+                ->setSubject($subject)
                 ->setFrom('server@'.gethostname())
                 ->setTo(['patrick.polloni@infinitycloud.com', 'chris.sedlmayr@infinitycloud.com', 'david.north@infinitycloud.com'])
                 ->setBody($body)
