@@ -35,7 +35,6 @@ class FeatureContext extends RawMinkContext
         $this->useContext('mink_redirect', new MinkRedirectContext());
         $this->useContext('symfony_mailer', new SymfonyMailerContext());
 
-
         // Loads all php files under features/bootstrap iterating nested folder
         $finder = new Finder();
         $finder->files('*.php')->in(__DIR__);
