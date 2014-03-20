@@ -1,6 +1,5 @@
 <?php
 
-use Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode,
     Behat\Behat\Event\StepEvent;
