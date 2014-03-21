@@ -1,0 +1,7 @@
+parameters:
+#    infinity_test.example.class: Infinity\Bundle\TestBundle\Example
+
+services:
+#    infinity_test.example:
+#        class: %infinity_test.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

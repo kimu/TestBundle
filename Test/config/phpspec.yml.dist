@@ -1,0 +1,8 @@
+formatter.name: pretty
+
+suites:
+    infinity_test_bundle_suite:
+        namespace: Infinity\Bundle\TestBundle
+        spec_prefix: spec
+        src_path: vendor/infinitytracking/test-bundle/Infinity/Bundle/TestBundle
+        spec_path: vendor/infinitytracking/test-bundle/Infinity/Bundle/TestBundle
