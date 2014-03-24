@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "358423fedb4b18133f43af4dd7ff4271",
+    "hash": "d1814f7e19cb77056bad29decc42e9f9",
     "packages": [
         {
             "name": "behat/behat",
@@ -310,6 +310,70 @@
                 "testing"
             ],
             "time": "2013-04-13 23:46:30"
+        },
+        {
+            "name": "behat/mink-bundle",
+            "version": "dev-master",
+            "target-dir": "Behat/MinkBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/MinkBundle.git",
+                "reference": "d9bc3144438f4d286d380d0d43dc1535690d46c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/MinkBundle/zipball/d9bc3144438f4d286d380d0d43dc1535690d46c1",
+                "reference": "d9bc3144438f4d286d380d0d43dc1535690d46c1",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": "~1.4",
+                "behat/mink-browserkit-driver": "~1.1.0",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.2"
+            },
+            "require-dev": {
+                "behat/mink-goutte-driver": "~1.0.8",
+                "behat/mink-sahi-driver": "~1.1.0",
+                "behat/mink-selenium-driver": "~1.1.0",
+                "behat/mink-selenium2-driver": "~1.1.0",
+                "behat/mink-zombie-driver": "~1.1.0"
+            },
+            "suggest": {
+                "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
+                "behat/mink-sahi-driver": "slow, but JS-enabled driver for any app (requires Sahi)",
+                "behat/mink-selenium-driver": "slow, but JS-enabled driver for any app (requires Selenium1)",
+                "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
+                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\MinkBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Ton Sharp",
+                    "email": "66ton99@gmail.com"
+                }
+            ],
+            "description": "Mink bundle for Symfony2",
+            "keywords": [
+                "browser",
+                "test",
+                "web"
+            ],
+            "time": "2014-02-18 12:40:01"
         },
         {
             "name": "behat/mink-extension",
@@ -1679,6 +1743,7 @@
     "stability-flags": {
         "behat/behat": 20,
         "behat/common-contexts": 20,
+        "behat/mink-bundle": 20,
         "phpspec/phpspec": 20
     },
     "platform": {
