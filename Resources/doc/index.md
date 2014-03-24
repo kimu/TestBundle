@@ -52,6 +52,16 @@ Finally, install the bundle typing this in a terminal
 The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
 
 ## Configuring the bundle
+### Configuring behat/mink-bundle
+
+The Test bundle install also [behat/mink-bundle](https://github.com/Behat/MinkBundle) which is used to run web acceptance tests and functional tests.   
+Mink-bundle have is own configuration that must be set up in order to use the bundle. Please follow the documentation at [https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup]
+(https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup)
+
+### Configuring Behat
+
+Read the documentation at [Configure Behat](configure_behat.md)
+
 ### Configuring services substitutions
 
 The Infinity Test Bundle allows to replace services in the test environment. This can be very useful to replace elements that cannot be
