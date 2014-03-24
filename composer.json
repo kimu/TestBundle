@@ -21,6 +21,8 @@
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*",
         "behat/symfony2-extension": "*",
+        "behat/common-contexts": "1.2.*@dev",
+        "behat/mink-bundle": "dev-master",
         "phpspec/phpspec": "2.0.*@dev"
     },
     "autoload": {

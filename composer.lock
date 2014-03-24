@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9b819e505c18691d6b8653f154196d2c",
+    "hash": "d1814f7e19cb77056bad29decc42e9f9",
     "packages": [
         {
             "name": "behat/behat",
@@ -66,6 +66,79 @@
                 "Symfony2"
             ],
             "time": "2014-03-13 14:55:50"
+        },
+        {
+            "name": "behat/common-contexts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/CommonContexts.git",
+                "reference": "7a9abc1cc7cb1f2ca799f0bd975d0d9aacf0c1e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/CommonContexts/zipball/7a9abc1cc7cb1f2ca799f0bd975d0d9aacf0c1e1",
+                "reference": "7a9abc1cc7cb1f2ca799f0bd975d0d9aacf0c1e1",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": ">=2.2.2",
+                "php": ">=5.3.1"
+            },
+            "suggest": {
+                "behat/mink-extension": "*",
+                "behat/symfony2-extension": "*",
+                "doctrine/data-fixtures": "*",
+                "doctrine/doctrine-bundle": "*",
+                "kriswallsmith/buzz": ">=0.5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\CommonContexts": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                },
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Jakub Zalas",
+                    "email": "jakub@zalas.pl",
+                    "homepage": "http://www.zalas.eu"
+                },
+                {
+                    "name": "Geoffrey Bachelet",
+                    "email": "geoffrey.bachelet@gmail.com",
+                    "homepage": "https://github.com/ubermuda"
+                }
+            ],
+            "description": "Commonly used contexts for Behat",
+            "homepage": "http://behat.org/",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "Context",
+                "Symfony2"
+            ],
+            "time": "2013-09-03 02:05:15"
         },
         {
             "name": "behat/gherkin",
@@ -237,6 +310,70 @@
                 "testing"
             ],
             "time": "2013-04-13 23:46:30"
+        },
+        {
+            "name": "behat/mink-bundle",
+            "version": "dev-master",
+            "target-dir": "Behat/MinkBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/MinkBundle.git",
+                "reference": "d9bc3144438f4d286d380d0d43dc1535690d46c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/MinkBundle/zipball/d9bc3144438f4d286d380d0d43dc1535690d46c1",
+                "reference": "d9bc3144438f4d286d380d0d43dc1535690d46c1",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": "~1.4",
+                "behat/mink-browserkit-driver": "~1.1.0",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.2"
+            },
+            "require-dev": {
+                "behat/mink-goutte-driver": "~1.0.8",
+                "behat/mink-sahi-driver": "~1.1.0",
+                "behat/mink-selenium-driver": "~1.1.0",
+                "behat/mink-selenium2-driver": "~1.1.0",
+                "behat/mink-zombie-driver": "~1.1.0"
+            },
+            "suggest": {
+                "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
+                "behat/mink-sahi-driver": "slow, but JS-enabled driver for any app (requires Sahi)",
+                "behat/mink-selenium-driver": "slow, but JS-enabled driver for any app (requires Selenium1)",
+                "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
+                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\MinkBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Ton Sharp",
+                    "email": "66ton99@gmail.com"
+                }
+            ],
+            "description": "Mink bundle for Symfony2",
+            "keywords": [
+                "browser",
+                "test",
+                "web"
+            ],
+            "time": "2014-02-18 12:40:01"
         },
         {
             "name": "behat/mink-extension",
@@ -1605,6 +1742,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "behat/behat": 20,
+        "behat/common-contexts": 20,
+        "behat/mink-bundle": 20,
         "phpspec/phpspec": 20
     },
     "platform": {
