@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d1814f7e19cb77056bad29decc42e9f9",
+    "hash": "d47e746af7d58e73d22e2b8aeac483e4",
     "packages": [
         {
             "name": "behat/behat",
@@ -313,7 +313,7 @@
         },
         {
             "name": "behat/mink-bundle",
-            "version": "dev-master",
+            "version": "v1.4.1",
             "target-dir": "Behat/MinkBundle",
             "source": {
                 "type": "git",
@@ -1743,7 +1743,6 @@
     "stability-flags": {
         "behat/behat": 20,
         "behat/common-contexts": 20,
-        "behat/mink-bundle": 20,
         "phpspec/phpspec": 20
     },
     "platform": {
