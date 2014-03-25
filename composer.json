@@ -22,7 +22,7 @@
         "behat/mink-selenium2-driver": "*",
         "behat/symfony2-extension": "*",
         "behat/common-contexts": "1.2.*@dev",
-        "behat/mink-bundle": "dev-master",
+        "behat/mink-bundle": "1.4.*",
         "phpspec/phpspec": "2.0.*@dev"
     },
     "autoload": {
