@@ -23,7 +23,10 @@
         "behat/symfony2-extension": "*",
         "behat/common-contexts": "1.2.*@dev",
         "behat/mink-bundle": "1.4.*",
-        "phpspec/phpspec": "2.0.*@dev"
+        "phpspec/phpspec": "2.0.*@dev",
+        "phpunit/phpunit": "3.7.*@dev",
+        "phpunit/php-code-coverage": "1.2.*@dev",
+        "phpunit/phpunit-mock-objects": "1.2.*@dev"
     },
     "autoload": {
         "psr-0": {
