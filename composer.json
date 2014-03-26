@@ -31,5 +31,5 @@
         }
     },
     "target-dir": "Infinity/Bundle/TestBundle",
-    "bin": ["bin/start_selenium.sh", "bin/stop_selenium.sh", "bin/run_test.sh"]
+    "bin": ["bin/start_selenium.sh", "bin/stop_selenium.sh", "bin/run_tests.sh"]
 }
