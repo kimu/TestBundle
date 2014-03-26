@@ -32,11 +32,11 @@ class ScriptHandler
             // check if behat has been correctly installed
             if (is_file('bin/behat')) {
                 system('bin/behat --init');
-                //Check that everything is correct before replacing FeatureContext.php
+                //Check that everything is correct before removing FeatureContext.php
                 if (is_dir('features') && is_dir('features/bootstrap')) {
-                    copy(__DIR__.'/../Test/Context/FeatureContext.php', 'features/bootstrap/FeatureContext.php');
+                    unlink('features/bootstrap/FeatureContext.php');
                 } else {
-                    echo 'Initialization of Behat failed, can not replace FeatureContext.php'.PHP_EOL;
+                    echo 'Initialization of Behat failed'.PHP_EOL;
 
                     return;
                 }
