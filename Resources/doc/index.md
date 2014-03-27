@@ -54,7 +54,7 @@ The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers 
 
 Register the bundle in AppKernel.php
 
-```
+```php
 if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 	$bundles[] = new Infinity\Bundle\TestBundle\InfinityTestBundle();
 }
@@ -63,7 +63,7 @@ if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 The bundle must be executed in the test environment. The best way to ensure that this happens is to create the file app_test.php under the web folder and use that as entry point for your tests.  
 You can copy and paste the following code.
 
-```
+```php
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
@@ -79,7 +79,6 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
-
 ```
 
 ## Configuring the bundle
