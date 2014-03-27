@@ -2,15 +2,15 @@
 
 namespace Infinity\Bundle\TestBundle\Test\Context;
 
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode,
-    Behat\Behat\Event\StepEvent;
+use Behat\Behat\Event\StepEvent;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
 use Behat\CommonContexts\MinkExtraContext,
     Behat\CommonContexts\MinkRedirectContext,
     Behat\CommonContexts\SymfonyMailerContext;
 use Symfony\Component\Finder\Finder;
+Use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 //
 // Require 3rd-party libraries here:
@@ -22,8 +22,13 @@ use Symfony\Component\Finder\Finder;
 /**
  * Features context.
  */
-class FeatureContext extends RawMinkContext
+class FeatureContext extends RawMinkContext implements KernelAwareInterface
 {
+    /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -84,5 +89,15 @@ class FeatureContext extends RawMinkContext
 
             \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance())->send($message);
         }
+    }
+
+    /**
+     * Sets Kernel instance.
+     *
+     * @param KernelInterface $kernel HttpKernel instance
+     */
+    public function setKernel(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
     }
 }
