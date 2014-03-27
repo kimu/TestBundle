@@ -9,8 +9,6 @@ use Behat\CommonContexts\MinkExtraContext,
     Behat\CommonContexts\MinkRedirectContext,
     Behat\CommonContexts\SymfonyMailerContext;
 use Symfony\Component\Finder\Finder;
-Use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 //
 // Require 3rd-party libraries here:
@@ -22,13 +20,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Features context.
  */
-class FeatureContext extends RawMinkContext implements KernelAwareInterface
+class FeatureContext extends RawMinkContext
 {
-    /**
-     * @var KernelInterface
-     */
-    protected $kernel;
-
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -89,15 +82,5 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
 
             \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance())->send($message);
         }
-    }
-
-    /**
-     * Sets Kernel instance.
-     *
-     * @param KernelInterface $kernel HttpKernel instance
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
     }
 }
