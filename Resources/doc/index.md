@@ -86,7 +86,7 @@ $kernel->terminate($request, $response);
 
 The Test bundle install also [behat/mink-bundle](https://github.com/Behat/MinkBundle) which is used to run web acceptance tests and functional tests.   
 Mink-bundle have is own configuration that must be set up in order to use the bundle. Please follow the documentation at [https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup]
-(https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup)
+(https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup) and [https://github.com/Behat/MinkBundle](https://github.com/Behat/MinkBundle)
 
 ### Configuring Behat
 
@@ -96,8 +96,8 @@ The only parameter that you should replace in behat.yml is `base_url` in the Min
 
 ```
 extensions:
-        Behat\MinkExtension\Extension:
-            base_url: 'http://url.to.my.dev.container/app_test.php'
+	Behat\MinkExtension\Extension:
+		base_url: 'http://url.to.my.dev.container/app_test.php'
 ```
 
 ### Configuring services substitutions
@@ -122,8 +122,8 @@ original service should be passed to the new class. If you don't need them, just
 If you don't need to change the value of `inherit_arguments` you can define substitutions using only the name of the class
 
 ```yaml
-    substitutions:
-        servicename: 'namespace\of\the\class'
+substitutions:
+	servicename: 'namespace\of\the\class'
 ```
 
 ## Utilities
