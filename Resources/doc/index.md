@@ -55,8 +55,10 @@ The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers 
 Register the bundle in AppKernel.php
 
 ```php
+# /app/AppKernel.php
+
 if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-	$bundles[] = new Infinity\Bundle\TestBundle\InfinityTestBundle();
+    $bundles[] = new Infinity\Bundle\TestBundle\InfinityTestBundle();
 }
 ```
 
@@ -65,6 +67,7 @@ You can copy and paste the following code.
 
 ```php
 <?php
+# /web/app_test.php
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -85,8 +88,9 @@ $kernel->terminate($request, $response);
 ### Configuring behat/mink-bundle
 
 The Test bundle install also [behat/mink-bundle](https://github.com/Behat/MinkBundle) which is used to run web acceptance tests and functional tests.   
-Mink-bundle have is own configuration that must be set up in order to use the bundle. Please follow the documentation at [https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup]
-(https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup) and [https://github.com/Behat/MinkBundle](https://github.com/Behat/MinkBundle)
+Mink-bundle have is own configuration that must be set up in order to use the bundle. Please follow the documentation at [https://github.com/Behat/MinkBundle](https://github.com/Behat/MinkBundle)  
+[https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup]
+(https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup)
 
 ### Configuring Behat
 
@@ -96,8 +100,8 @@ The only parameter that you should replace in behat.yml is `base_url` in the Min
 
 ```
 extensions:
-	Behat\MinkExtension\Extension:
-		base_url: 'http://url.to.my.dev.container/app_test.php'
+    Behat\MinkExtension\Extension:
+        base_url: 'http://url.to.my.dev.container/app_test.php'
 ```
 
 ### Configuring services substitutions
@@ -123,7 +127,7 @@ If you don't need to change the value of `inherit_arguments` you can define subs
 
 ```yaml
 substitutions:
-	servicename: 'namespace\of\the\class'
+    servicename: 'namespace\of\the\class'
 ```
 
 ## Utilities
