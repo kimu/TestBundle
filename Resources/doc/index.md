@@ -14,7 +14,7 @@ yum install selenium
  in a terminal before using this bundle.
  <hr />
 
-In order to install the bundle in your project you must add a few lines in your composer.json
+Add a few lines in your composer.json to install the bundle
 
 ```json
 {
@@ -38,7 +38,8 @@ In order to install the bundle in your project you must add a few lines in your 
 ```
 
 The first post install script installs behat.yml.dist and phpspec.yml.dist under your `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
-The second post install script initialises Behat for you and replaces FeatureContext.php with a version of the class that makes use of Mink.
+The second post install script initialises Behat for you and remove FeatureContext.php because Behat is configured to use Infinity\Bundle\TestBundle\Test\Context\FeatureContext class as default main context.
+
 
 The order of the two scripts is important. The first script must be the first script in the list and must be before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).  
 The second script must be the last script in the list.
@@ -51,16 +52,57 @@ Finally, install the bundle typing this in a terminal
 
 The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
 
+Register the bundle in AppKernel.php
+
+```php
+# /app/AppKernel.php
+
+if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+    $bundles[] = new Infinity\Bundle\TestBundle\InfinityTestBundle();
+}
+```
+
+The bundle must be executed in the test environment. The best way to ensure that this happens is to create the file app_test.php under the web folder and use that as entry point for your tests.  
+You can copy and paste the following code.
+
+```php
+<?php
+# /web/app_test.php
+
+use Symfony\Component\HttpFoundation\Request;
+
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+
+require_once __DIR__.'/../app/AppKernel.php';
+
+$kernel = new AppKernel('test', true);
+$kernel->loadClassCache();
+
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
+```
+
 ## Configuring the bundle
 ### Configuring behat/mink-bundle
 
 The Test bundle install also [behat/mink-bundle](https://github.com/Behat/MinkBundle) which is used to run web acceptance tests and functional tests.   
-Mink-bundle have is own configuration that must be set up in order to use the bundle. Please follow the documentation at [https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup]
+Mink-bundle have is own configuration that must be set up in order to use the bundle. Please follow the documentation at [https://github.com/Behat/MinkBundle](https://github.com/Behat/MinkBundle)  
+[https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup]
 (https://github.com/Behat/MinkBundle/blob/master/Resources/doc/index.rst#bundle-installation--setup)
 
 ### Configuring Behat
 
-Read the documentation at [Configure Behat](configure_behat.md)
+If you are not using Incenteev\ParameterHandler as described above, once the bundle is installed copy behat.yml.dist under the app/config folder of your project and make another copy under the root of your project and rename it as behat.yml. You can find behat.yml.dist under TestBundle/Test/config.
+
+The only parameter that you should replace in behat.yml is `base_url` in the MinkExtension configuration. Assign here the base url to your dev container  - followed by app_test.php if you have created that file -.
+
+```
+extensions:
+    Behat\MinkExtension\Extension:
+        base_url: 'http://url.to.my.dev.container/app_test.php'
+```
 
 ### Configuring services substitutions
 
@@ -84,8 +126,8 @@ original service should be passed to the new class. If you don't need them, just
 If you don't need to change the value of `inherit_arguments` you can define substitutions using only the name of the class
 
 ```yaml
-    substitutions:
-        servicename: 'namespace\of\the\class'
+substitutions:
+    servicename: 'namespace\of\the\class'
 ```
 
 ## Utilities
@@ -101,4 +143,3 @@ It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `sourc
 <hr />
 # Further readings
 [Howto create phpsepc tests](howto_create_phpspec_tests.md)   
-[Configure Behat](configure_behat.md)

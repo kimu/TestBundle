@@ -2,6 +2,8 @@ default:
     paths:
         features: features
         bootstrap: %behat.paths.features%/bootstrap
+    context:
+        class: Infinity\Bundle\TestBundle\Test\Context\FeatureContext
     formatter:
         name: pretty
     extensions:
@@ -12,8 +14,5 @@ default:
             default_session: goutte
             javascript_session: selenium2
             browser_name: firefox
-
-# Read the documention on http://extensions.behat.org/symfony2/index.html if you want to use the Symfony2 extension
-#        Behat\Symfony2Extension\Extension:
-#            mink_driver: true
-
+        Behat\Symfony2Extension\Extension:
+            mink_driver: true

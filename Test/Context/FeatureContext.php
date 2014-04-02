@@ -1,8 +1,8 @@
 <?php
 
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode,
-    Behat\Behat\Event\StepEvent;
+namespace Infinity\Bundle\TestBundle\Test\Context;
+
+use Behat\Behat\Event\StepEvent;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
 use Behat\CommonContexts\MinkExtraContext,
@@ -37,11 +37,11 @@ class FeatureContext extends RawMinkContext
 
         // Loads all php files under features/bootstrap iterating nested folder
         $finder = new Finder();
-        $finder->files('*.php')->in(__DIR__);
+        $finder->files('*.php')->in(__DIR__.'/../../../../../../../../features/bootstrap');
         foreach ($finder as $file) {
-            if (__CLASS__ != $class = $file->getBasename('.php')) {
-                $this->useContext($class, new $class($parameters));
-            }
+            require_once ($file->getRealPath());
+            $class = $file->getBasename('.php');
+            $this->useContext($class, new $class($parameters));
         }
     }
 

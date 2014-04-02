@@ -27,7 +27,7 @@ Add this lines to you composer.json
     }
 ```
 
-Doing so you're instructing ParameterHandler to take care of your config files. When you need to add a new configuration to these files add them to your dist files in `app/config`. Then you can decide whether copy the new content in your yml (under the root of the project...) files manually or open your terminal and type 
+Doing so you're instructing ParameterHandler to take care of your config files. When you need to add a new configuration to these files add them to your dist files in `app/config`. Then you can decide whether to copy the new content in your yml (under the root of the project...) files manually or to open your terminal and type 
 
 ```sh
 ./composer.phar run-script post-install-cmd
