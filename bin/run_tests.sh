@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Starts and stops Xvfb and Selenium and run all phpunit and phpspec tests
+# Starts and stops Xvfb and Selenium and run all phpunit, behat and phpspec tests
 #
 
 # Http and https proxies can lead selenium tests to fail, so we remove them before launching all others commands
@@ -10,14 +10,13 @@ HTTPPROXY=$http_proxy
 
 unset https_proxy ;
 unset http_proxy ;
-rm -rf app/cache/test/* ;
-app/console cache:warmup --env=test ;
-chmod -R 0777 app/cache ;
+php -d memory_limit=256M app/console cache:clear --env=test ;
+chmod -R 0777 app/cache app/logs ;
 bin/stop_selenium.sh ;
 bin/start_selenium.sh &&
-php -d memory_limit=128M bin/behat ;
-php -d memory_limit=128M bin/phpspec ;
+php -d memory_limit=128M bin/phpspec run ;
+php -d memory_limit=128M bin/phpunit -c app/ ;
+php -d memory_limit=128M bin/behat --verbose ;
 bin/stop_selenium.sh ;
 export https_proxy=$HTTPSPROXY ;
 export http_proxy=$HTTPPROXY
-
