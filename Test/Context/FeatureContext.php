@@ -8,7 +8,9 @@ use Behat\MinkExtension\Context\MinkContext,
 use Behat\CommonContexts\MinkExtraContext,
     Behat\CommonContexts\MinkRedirectContext,
     Behat\CommonContexts\SymfonyMailerContext;
+use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 //
 // Require 3rd-party libraries here:
@@ -20,8 +22,13 @@ use Symfony\Component\Finder\Finder;
 /**
  * Features context.
  */
-class FeatureContext extends RawMinkContext
+class FeatureContext extends RawMinkContext implements KernelAwareInterface
 {
+    /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -52,8 +59,11 @@ class FeatureContext extends RawMinkContext
      */
     public function getScreenshotOnFailure(StepEvent $event)
     {
-        // 4 is the exit code for failing steps && We can get a screenshot only if Selenium2 is used
-        if (4 === $event->getResult() && $this->getSession()->getDriver() instanceof \Behat\Mink\Driver\Selenium2Driver) {
+        // 4 is the exit code for failing steps && We can get a screenshot only if Selenium2 is used && we have recipients
+        if (4 === $event->getResult() &&
+            $this->getSession()->getDriver() instanceof \Behat\Mink\Driver\Selenium2Driver &&
+            $this->kernel->getContainer()->hasParameter('infinity_test.recipients')
+        ) {
             $screenshot = $this->getSession()->getDriver()->getScreenshot();
             $file       = sys_get_temp_dir().'/firefox_'.date('Ymd_His').'.png';
             file_put_contents($file, $screenshot);
@@ -75,12 +85,22 @@ class FeatureContext extends RawMinkContext
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom('server@'.gethostname())
-                ->setTo(['patrick.polloni@infinitycloud.com', 'chris.sedlmayr@infinitycloud.com', 'david.north@infinitycloud.com'])
+                ->setTo($this->kernel->getContainer()->getParameter('infinity_test.recipients'))
                 ->setBody($body)
                 ->attach(\Swift_Attachment::fromPath($file))
             ;
 
             \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance())->send($message);
         }
+    }
+
+    /**
+     * Sets Kernel instance.
+     *
+     * @param KernelInterface $kernel HttpKernel instance
+     */
+    public function setKernel(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
     }
 }

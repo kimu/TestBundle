@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->fixXmlConfig('substitution')
+            ->fixXmlConfig('recipient')
             ->children()
                 ->arrayNode('substitutions')
                     ->info('Substitutions definitions')
@@ -43,6 +44,11 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('recipients')
+                    ->canBeUnset()
+                    ->info('Recipients of the emails sent when a screenshots is taken on failure')
+                    ->prototype('scalar')->end()
+                 ->end()
             ->end()
         ;
 
