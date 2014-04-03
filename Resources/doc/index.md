@@ -130,6 +130,28 @@ substitutions:
     servicename: 'namespace\of\the\class'
 ```
 
+### Configuring recipients
+
+When an error occours the bundle try to send an email with a screenshot attached (implemented only for behat tests at the time of writing).   
+You can specify the email address of the recipients using the `recipients` key in the bundle configuration
+
+```yaml
+# /app/config/config_test.yml
+infinity_test:
+    recipients:
+         - email1@example.com
+         - email2@example.com
+```
+
+This value can be overwrtitten in parameters.yml, which is useful if you want to limit the submission only to your email address when working locally.
+
+```yaml
+# /app/config/parameters.yml
+infinity_test:
+    recipients:
+         - myemail@example.com
+```
+
 ## Utilities
 The Infinity Test Bundle installs 3 files under the bin folder of your project.    
 Files are:
