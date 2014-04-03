@@ -38,7 +38,7 @@ Add a few lines in your composer.json to install the bundle
 ```
 
 The first post install script installs behat.yml.dist and phpspec.yml.dist under your `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
-The second post install script initialises Behat for you and remove FeatureContext.php because Behat is configured to use Infinity\Bundle\TestBundle\Test\Context\FeatureContext class as default main context.
+The second post install script initialises Behat for you and remove FeatureContext.php because Behat is configured to use `Infinity\Bundle\TestBundle\Test\Context\FeatureContext` class as default main context.
 
 
 The order of the two scripts is important. The first script must be the first script in the list and must be before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).  
@@ -57,7 +57,7 @@ Register the bundle in AppKernel.php
 ```php
 # /app/AppKernel.php
 
-if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+if ('test' == $this->getEnvironment()) {
     $bundles[] = new Infinity\Bundle\TestBundle\InfinityTestBundle();
 }
 ```
@@ -136,7 +136,7 @@ Files are:
 
 * `start_selenium.sh` which starts Xvfb and Selenium2
 * `stop_selenium.sh` which stops Xvfb and Selenium2
-* `run_test.sh` which start and stop Xvfb and Selenium and run all Behat and Phpspec test in your project.
+* `run_test.sh` which start and stop Xvfb and Selenium and run all Behat, PHPUnit and Phpspec test in your project.
 
 It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `source bin/run_test.sh` otherwise part of what the script does won't be correctly executed.
 
