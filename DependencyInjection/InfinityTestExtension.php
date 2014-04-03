@@ -26,7 +26,7 @@ class InfinityTestExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('infinity_test.substitutions', $config['substitutions']);
-        if (isset($config['recipients'])) {
+        if (!empty($config['recipients'])) {
             $container->setParameter('infinity_test.recipients', $config['recipients']);
         }
     }

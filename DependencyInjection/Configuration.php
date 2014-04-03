@@ -45,7 +45,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('recipients')
-                    ->canBeEnabled()
+                    ->canBeUnset()
                     ->info('Recipients of the emails sent when a screenshots is taken on failure')
                     ->prototype('scalar')->end()
                  ->end()
