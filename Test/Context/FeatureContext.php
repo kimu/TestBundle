@@ -118,7 +118,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
                 //load migrations
                 exec($this->kernel->getRootDir().'/console doctrine:migrations:migrate --env=test -n');
             } else {
-                throw new RuntimeException('An error have prevented the creation of the test DB, please check your configuration');
+                throw new RuntimeException('An error has prevented the creation of the test DB, please check your configuration');
             }
         }
     }
