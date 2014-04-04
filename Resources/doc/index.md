@@ -165,3 +165,4 @@ It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `sourc
 <hr />
 # Further readings
 [Howto create phpsepc tests](howto_create_phpspec_tests.md)   
+[Testing with a DB](howto_write_tests_that_rely_on_a_database.md)   
