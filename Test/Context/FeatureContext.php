@@ -2,6 +2,9 @@
 
 namespace Infinity\Bundle\TestBundle\Test\Context;
 
+use Behat\Behat\Event\BaseScenarioEvent;
+use Behat\Behat\Event\OutlineExampleEvent;
+use Behat\Behat\Event\ScenarioEvent;
 use Behat\Behat\Event\StepEvent;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
@@ -11,6 +14,7 @@ use Behat\CommonContexts\MinkExtraContext,
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
+use RuntimeException;
 
 //
 // Require 3rd-party libraries here:
@@ -91,6 +95,48 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
             ;
 
             \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance())->send($message);
+        }
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function setUpDB(BaseScenarioEvent $event)
+    {
+        if ($event instanceof OutlineExampleEvent) {
+            $scenario = $event->getOutline();
+        } else if ($event instanceof ScenarioEvent) {
+            $scenario = $event->getScenario();
+        }
+
+        if ($scenario->hasTag('db')) {
+            // Start with dropping the db, in case a previous error stopped the execution
+            exec($this->kernel->getRootDir().'/console doctrine:database:drop --env=test --force -n');
+            // Create a new instance of the DB
+            exec($this->kernel->getRootDir().'/console doctrine:database:create --env=test -n', $output, $ret);
+            if (0 == $ret) {
+                //load migrations
+                exec($this->kernel->getRootDir().'/console doctrine:migrations:migrate --env=test -n');
+            } else {
+                throw new RuntimeException('An error has prevented the creation of the test DB, please check your configuration');
+            }
+        }
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function tearDownDB(BaseScenarioEvent $event)
+    {
+        if ($event instanceof OutlineExampleEvent) {
+            $scenario = $event->getOutline();
+        } else if ($event instanceof ScenarioEvent) {
+            $scenario = $event->getScenario();
+        }
+
+        if ($scenario->hasTag('db')) {
+            // Drop the test db
+            exec($this->kernel->getRootDir().'/console doctrine:database:drop --env=test --force -n');
         }
     }
 
