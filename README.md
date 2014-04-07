@@ -1,4 +1,4 @@
-Infinity Tracking TestBundle
+Infinity Tracking TestBundle [![Build Status](https://travis-ci.org/infinitytracking/TestBundle.svg)](https://travis-ci.org/infinitytracking/TestBundle)
 =====================
 <hr>
 >WARNING!   
