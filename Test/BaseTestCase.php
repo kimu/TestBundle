@@ -9,10 +9,6 @@ class BaseTestCase extends MinkTestCase
 {
     use Selenium2Trait;
 
-    public function setUp()
-    {
-    }
-
     public function tearDown()
     {
         parent::tearDown();

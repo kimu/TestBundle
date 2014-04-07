@@ -12,6 +12,7 @@ use Behat\CommonContexts\MinkExtraContext,
     Behat\CommonContexts\MinkRedirectContext,
     Behat\CommonContexts\SymfonyMailerContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -86,16 +87,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         }
 
         if ($scenario->hasTag('db')) {
-            // Start with dropping the db, in case a previous error stopped the execution
-            exec($this->kernel->getRootDir().'/console doctrine:database:drop --env=test --force -n');
-            // Create a new instance of the DB
-            exec($this->kernel->getRootDir().'/console doctrine:database:create --env=test -n', $output, $ret);
-            if (0 == $ret) {
-                //load migrations
-                exec($this->kernel->getRootDir().'/console doctrine:migrations:migrate --env=test -n');
-            } else {
-                throw new RuntimeException('An error has prevented the creation of the test DB, please check your configuration');
-            }
+            $helper = new DatabaseHelper($this->kernel);
+            $helper->setUpDatabase();
         }
     }
 
@@ -112,7 +105,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
 
         if ($scenario->hasTag('db')) {
             // Drop the test db
-            exec($this->kernel->getRootDir().'/console doctrine:database:drop --env=test --force -n');
+            $helper = new DatabaseHelper($this->kernel);
+            $helper->tearDownDatabase();
         }
     }
 
