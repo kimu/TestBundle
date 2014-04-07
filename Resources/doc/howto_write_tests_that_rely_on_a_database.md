@@ -28,3 +28,32 @@ If you need a DB just add the tag `@db` to you scenarios (works only for scenari
 You can use what you find more comfortable to you to create data in DB. You can access Doctrine implementing the `KernelAwareInterface` in you Context class.
 
 For massive data creation take a look to [https://github.com/fzaninotto/Faker](https://github.com/fzaninotto/Faker).
+
+## PHPUnit and DB
+
+If you need a DB to be set up for you in your PHPUnit tests you can use `Infinity\Bundle\TestBundle\Test\DBTestCase` that will take care of setting up and tearing down the test DB respectively before and after every single test.
+
+## DatabaseHelper
+
+TestBundle provides also an helper, the DatabaseHelper which can be used to setup or drop the testing DB. This class is used internally to create and drop databases, but you can use it directly to perform these operations.
+
+The following example shows how to create and drop the DB using `setUpBeforeClass` and `tearDownAfterClass`.
+
+```php
+# MyTestCase.php
+use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
+
+public static function setUpBeforeClass()
+{
+    // Error suppresion is used to suppress the warning thrown because getKernel is not a static function 
+    $helper = new DatabaseHelper(@self::getKernel());
+    $helper->setUpDatabase();
+    parent::setUpBeforeClass();}
+
+public static function tearDownAfterClass() 
+{
+    $helper = new DatabaseHelper(@self::getKernel());
+    $helper->tearDownDatabase();
+    parent::tearDownAfterClass();		}
+	
+```
