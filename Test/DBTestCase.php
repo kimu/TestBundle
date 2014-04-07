@@ -16,7 +16,7 @@ class DBTestCase extends BaseTestCase
 
     public function tearDown()
     {
-        parent::setUp();
+        parent::tearDown();
         $this->tearDownDatabase();
     }
 }

@@ -35,7 +35,8 @@ If you need a DB to be set up for you in your PHPUnit tests you can use `Infinit
 
 ## DatabaseHelper
 
-TestBundle provides also an helper, the DatabaseHelper which can be used to setup or drop the testing DB. This class is used internally to create and drop databases, but you can use it directly to perform these operations.
+TestBundle also provides the DatabaseHelper, which can be used to setup or drop the testing DB.  
+This class is used internally to create and drop databases, but you can use it directly to perform these operations.
 
 The following example shows how to create and drop the DB using `setUpBeforeClass` and `tearDownAfterClass`.
 
