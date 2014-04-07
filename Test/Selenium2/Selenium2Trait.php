@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Infinity\Bundle\TestBundle\Test\Selenium2;
 
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;

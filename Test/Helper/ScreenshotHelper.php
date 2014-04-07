@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Infinity\Bundle\TestBundle\Test\Helper;
 
 use Behat\Mink\Driver\DriverInterface;
@@ -16,9 +15,9 @@ class ScreenshotHelper
     }
 
     /**
-     * @param DriverInterface $driver   Selenium2 driver or any other driver that has a getScreenshot method
-     * @param String          $testName Name of the failing test
-     * @param bool $sendEmail Default true. True to send the email to infinity_tests.recipients
+     * @param DriverInterface $driver    Selenium2 driver or any other driver that has a getScreenshot method
+     * @param String          $testName  Name of the failing test
+     * @param bool            $sendEmail Default true. True to send the email to infinity_tests.recipients
      *
      * @return string The screenshot filename
      */

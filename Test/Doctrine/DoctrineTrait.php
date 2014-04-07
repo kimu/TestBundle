@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Infinity\Bundle\TestBundle\Test\Doctrine;
 
 use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;

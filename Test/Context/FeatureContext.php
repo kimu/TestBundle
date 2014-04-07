@@ -16,7 +16,6 @@ use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
-use RuntimeException;
 
 //
 // Require 3rd-party libraries here:
@@ -82,7 +81,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         if ($event instanceof OutlineExampleEvent) {
             $scenario = $event->getOutline();
-        } else if ($event instanceof ScenarioEvent) {
+        } elseif ($event instanceof ScenarioEvent) {
             $scenario = $event->getScenario();
         }
 
@@ -99,7 +98,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         if ($event instanceof OutlineExampleEvent) {
             $scenario = $event->getOutline();
-        } else if ($event instanceof ScenarioEvent) {
+        } elseif ($event instanceof ScenarioEvent) {
             $scenario = $event->getScenario();
         }
 
