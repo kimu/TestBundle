@@ -12,9 +12,10 @@ use Behat\CommonContexts\MinkExtraContext,
     Behat\CommonContexts\MinkRedirectContext,
     Behat\CommonContexts\SymfonyMailerContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
+use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
-use RuntimeException;
 
 //
 // Require 3rd-party libraries here:
@@ -68,33 +69,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
             $this->getSession()->getDriver() instanceof \Behat\Mink\Driver\Selenium2Driver &&
             $this->kernel->getContainer()->hasParameter('infinity_test.recipients')
         ) {
-            $screenshot = $this->getSession()->getDriver()->getScreenshot();
-            $file       = sys_get_temp_dir().'/firefox_'.date('Ymd_His').'.png';
-            file_put_contents($file, $screenshot);
-
-            $body    = 'Screenshot of failing step: '.$event->getStep()->getText();
-            $subject = 'Failing step: '.$event->getStep()->getText();
-
-            if (false !== getenv('TRAVIS')) {
-                $subject = 'TravisCI '.$subject;
-                $body   .= PHP_EOL.
-                    'Branch: '.getenv('TRAVIS_BRANCH').PHP_EOL.
-                    'Commit: '.getenv('TRAVIS_COMMIT').PHP_EOL.
-                    'Pull Request: '.getenv('TRAVIS_PULL_REQUEST').PHP_EOL.
-                    'User/Repo: '.getenv('TRAVIS_REPO_SLUG')
-                ;
-            }
-
-            // Send the email with the screenshot attached
-            $message = \Swift_Message::newInstance()
-                ->setSubject($subject)
-                ->setFrom('server@'.gethostname())
-                ->setTo($this->kernel->getContainer()->getParameter('infinity_test.recipients'))
-                ->setBody($body)
-                ->attach(\Swift_Attachment::fromPath($file))
-            ;
-
-            \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance())->send($message);
+            $helper = new ScreenshotHelper($this->kernel);
+            $helper->getScreenshot($this->getSession()->getDriver(), $event->getStep()->getText());
         }
     }
 
@@ -105,21 +81,13 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         if ($event instanceof OutlineExampleEvent) {
             $scenario = $event->getOutline();
-        } else if ($event instanceof ScenarioEvent) {
+        } elseif ($event instanceof ScenarioEvent) {
             $scenario = $event->getScenario();
         }
 
         if ($scenario->hasTag('db')) {
-            // Start with dropping the db, in case a previous error stopped the execution
-            exec($this->kernel->getRootDir().'/console doctrine:database:drop --env=test --force -n');
-            // Create a new instance of the DB
-            exec($this->kernel->getRootDir().'/console doctrine:database:create --env=test -n', $output, $ret);
-            if (0 == $ret) {
-                //load migrations
-                exec($this->kernel->getRootDir().'/console doctrine:migrations:migrate --env=test -n');
-            } else {
-                throw new RuntimeException('An error has prevented the creation of the test DB, please check your configuration');
-            }
+            $helper = new DatabaseHelper($this->kernel);
+            $helper->setUpDatabase();
         }
     }
 
@@ -130,13 +98,14 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         if ($event instanceof OutlineExampleEvent) {
             $scenario = $event->getOutline();
-        } else if ($event instanceof ScenarioEvent) {
+        } elseif ($event instanceof ScenarioEvent) {
             $scenario = $event->getScenario();
         }
 
         if ($scenario->hasTag('db')) {
             // Drop the test db
-            exec($this->kernel->getRootDir().'/console doctrine:database:drop --env=test --force -n');
+            $helper = new DatabaseHelper($this->kernel);
+            $helper->tearDownDatabase();
         }
     }
 
