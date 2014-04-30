@@ -13,12 +13,18 @@ use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
  */
 trait DoctrineTrait
 {
+    /**
+     * @before
+     */
     public function setUpDatabase()
     {
         $helper = new DatabaseHelper($this->getKernel());
         $helper->setUpDatabase();
     }
 
+    /**
+     * @after
+     */
     public function tearDownDatabase()
     {
         $helper = new DatabaseHelper($this->getKernel());

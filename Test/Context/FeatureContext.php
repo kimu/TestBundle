@@ -20,8 +20,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 //
 // Require 3rd-party libraries here:
 //
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
+//   require_once 'src/Framework/Assert/Functions.php';
 //
 
 /**
