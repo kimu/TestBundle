@@ -24,7 +24,7 @@
         "behat/common-contexts": "1.2.*@dev",
         "behat/mink-bundle": "1.4.*",
         "phpspec/phpspec": "2.0.*@dev",
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.1"
     },
     "autoload": {
         "psr-0": {
