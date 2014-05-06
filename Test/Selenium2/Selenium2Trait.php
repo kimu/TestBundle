@@ -13,9 +13,6 @@ use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
  */
 trait Selenium2Trait
 {
-    /**
-     * @after
-     */
     public function getScreenshotOnFailure()
     {
         $mink = $this->getMink();

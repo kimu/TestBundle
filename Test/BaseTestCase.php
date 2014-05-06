@@ -8,4 +8,10 @@ use Infinity\Bundle\TestBundle\Test\Selenium2\Selenium2Trait;
 class BaseTestCase extends MinkTestCase
 {
     use Selenium2Trait;
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        $this->getScreenshotOnFailure();
+    }
 }
