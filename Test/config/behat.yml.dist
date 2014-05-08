@@ -14,5 +14,5 @@ default:
             default_session: goutte
             javascript_session: selenium2
             browser_name: firefox
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
+        Behat\Symfony2Extension\Extension: ~
+#            mink_driver: true
