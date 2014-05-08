@@ -44,17 +44,45 @@ The following example shows how to create and drop the DB using `setUpBeforeClas
 # MyTestCase.php
 use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 
-public static function setUpBeforeClass()
+class MyTestCase extends MinkTestCase 
 {
-    // Error suppresion is used to suppress the warning thrown because getKernel is not a static function 
-    $helper = new DatabaseHelper(@self::getKernel());
-    $helper->setUpDatabase();
-    parent::setUpBeforeClass();}
+    /**
+    * @before
+    */
+    public static function setUpDatabase()
+    {
+        // Error suppresion is used to suppress the warning thrown because getKernel is not a static function 
+        $helper = new DatabaseHelper(@self::getKernel());
+        $helper->setUpDatabase();
+    }
 
-public static function tearDownAfterClass() 
-{
-    $helper = new DatabaseHelper(@self::getKernel());
-    $helper->tearDownDatabase();
-    parent::tearDownAfterClass();		}
-	
+    /**
+    * @after
+    */ 
+    public static function tearDownDatabase() 
+    {
+        $helper = new DatabaseHelper(@self::getKernel());
+        $helper->tearDownDatabase();
+        parent::tearDownAfterClass();		
+    }
+}	
 ```
+
+As you can notice the above methods use error suppression to suppress the warning thrown because MinkTestCase::getKernel is not a static function.   
+A method to avoid it is to crete a static method that does the same operation of `getKernel`, but allows you to call it without error suppression.
+
+```php
+public static function getStaticKernel()
+{
+    if (null === static::$kernel) {
+        static::$kernel = static::createKernel();
+    }
+    if (!static::$kernel->getContainer()) {
+        static::$kernel->boot();
+    }
+    return static::$kernel;
+}
+
+```
+
+Now you can call `self::getStaticKernel()` instead of `self::getKernel()` and avoid error suppression.

@@ -20,8 +20,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 //
 // Require 3rd-party libraries here:
 //
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
+//   require_once 'src/Framework/Assert/Functions.php';
 //
 
 /**
@@ -44,7 +43,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         $this->useContext('mink', new MinkContext);
         $this->useContext('mink_extra', new MinkExtraContext());
-        $this->useContext('mink_redirect', new MinkRedirectContext());
+        // Removed until https://github.com/Behat/CommonContexts/pull/56 is merged
+        //$this->useContext('mink_redirect', new MinkRedirectContext());
         $this->useContext('symfony_mailer', new SymfonyMailerContext());
 
         // Loads all php files under features/bootstrap iterating nested folder
