@@ -10,6 +10,9 @@ use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
+//use Behat\CommonContexts\MinkExtraContext,
+//    Behat\CommonContexts\MinkRedirectContext,
+//    Behat\CommonContexts\SymfonyMailerContext;
 
 //
 // Require 3rd-party libraries here:
