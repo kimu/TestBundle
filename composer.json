@@ -15,13 +15,12 @@
     "require": {
         "php": ">=5.4.0",
         "symfony/symfony": "~2.4",
-        "behat/behat": "2.5.*@dev",
+        "behat/behat": "3.0.*@dev",
         "behat/mink": "~1.5.0",
-        "behat/mink-extension": "*",
+        "behat/mink-extension": "dev-master",
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*",
-        "behat/symfony2-extension": "*",
-        "behat/common-contexts": "1.2.*@dev",
+        "behat/symfony2-extension": "dev-master",
         "behat/mink-bundle": "1.4.*",
         "phpspec/phpspec": "2.0.*@dev",
         "phpunit/phpunit": "~4.1"

@@ -2,15 +2,16 @@
 
 namespace Infinity\Bundle\TestBundle\Test\Context;
 
-use Behat\Behat\Event\BaseScenarioEvent;
-use Behat\Behat\Event\OutlineExampleEvent;
-use Behat\Behat\Event\ScenarioEvent;
-use Behat\Behat\Event\StepEvent;
+//use Behat\Behat\Event\BaseScenarioEvent;
+//use Behat\Behat\Event\OutlineExampleEvent;
+//use Behat\Behat\Event\ScenarioEvent;
+//use Behat\Behat\Event\StepEvent;
+use Behat\Behat\EventDispatcher\Event\GherkinNodeTested;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
-use Behat\CommonContexts\MinkExtraContext,
-    Behat\CommonContexts\MinkRedirectContext,
-    Behat\CommonContexts\SymfonyMailerContext;
+//use Behat\CommonContexts\MinkExtraContext,
+//    Behat\CommonContexts\MinkRedirectContext,
+//    Behat\CommonContexts\SymfonyMailerContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
@@ -42,10 +43,11 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     public function __construct(array $parameters)
     {
         $this->useContext('mink', new MinkContext);
-        $this->useContext('mink_extra', new MinkExtraContext());
-        // Removed until https://github.com/Behat/CommonContexts/pull/56 is merged
-        //$this->useContext('mink_redirect', new MinkRedirectContext());
-        $this->useContext('symfony_mailer', new SymfonyMailerContext());
+
+        // Removed until common context is upgrade to behat 3.0
+//        $this->useContext('mink_extra', new MinkExtraContext());
+//        $this->useContext('mink_redirect', new MinkRedirectContext());
+//        $this->useContext('symfony_mailer', new SymfonyMailerContext());
 
         // Loads all php files under features/bootstrap iterating nested folder
         $finder = new Finder();
@@ -77,13 +79,9 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     /**
      * @BeforeScenario
      */
-    public function setUpDB(BaseScenarioEvent $event)
+    public function setUpDB(GherkinNodeTested $event)
     {
-        if ($event instanceof OutlineExampleEvent) {
-            $scenario = $event->getOutline();
-        } elseif ($event instanceof ScenarioEvent) {
-            $scenario = $event->getScenario();
-        }
+        $scenario = $event->getNode();
 
         if ($scenario->hasTag('db')) {
             $helper = new DatabaseHelper($this->kernel);
@@ -94,13 +92,14 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     /**
      * @AfterScenario
      */
-    public function tearDownDB(BaseScenarioEvent $event)
+    public function tearDownDB(GherkinNodeTested $event)
     {
-        if ($event instanceof OutlineExampleEvent) {
-            $scenario = $event->getOutline();
-        } elseif ($event instanceof ScenarioEvent) {
-            $scenario = $event->getScenario();
-        }
+//        if ($event instanceof OutlineExampleEvent) {
+//            $scenario = $event->getOutline();
+//        } elseif ($event instanceof ScenarioEvent) {
+//            $scenario = $event->getScenario();
+//        }
+        $scenario = $event->getNode();
 
         if ($scenario->hasTag('db')) {
             // Drop the test db
