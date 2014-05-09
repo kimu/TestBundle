@@ -2,16 +2,9 @@
 
 namespace Infinity\Bundle\TestBundle\Test\Context;
 
-//use Behat\Behat\Event\BaseScenarioEvent;
-//use Behat\Behat\Event\OutlineExampleEvent;
-//use Behat\Behat\Event\ScenarioEvent;
-//use Behat\Behat\Event\StepEvent;
 use Behat\Behat\EventDispatcher\Event\GherkinNodeTested;
 use Behat\MinkExtension\Context\MinkContext,
     Behat\MinkExtension\Context\RawMinkContext;
-//use Behat\CommonContexts\MinkExtraContext,
-//    Behat\CommonContexts\MinkRedirectContext,
-//    Behat\CommonContexts\SymfonyMailerContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
@@ -94,11 +87,6 @@ class FeatureContext extends RawMinkContext implements KernelAwareContext
      */
     public function tearDownDB(GherkinNodeTested $event)
     {
-//        if ($event instanceof OutlineExampleEvent) {
-//            $scenario = $event->getOutline();
-//        } elseif ($event instanceof ScenarioEvent) {
-//            $scenario = $event->getScenario();
-//        }
         $scenario = $event->getNode();
 
         if ($scenario->hasTag('db')) {
