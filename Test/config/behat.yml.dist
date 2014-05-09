@@ -1,11 +1,10 @@
 default:
-    paths:
-        features: features
-        bootstrap: %behat.paths.features%/bootstrap
-    context:
-        class: Infinity\Bundle\TestBundle\Test\Context\FeatureContext
-    formatter:
-        name: pretty
+  suites:
+    default:
+        path: %paths.base%/features
+        contexts: [Infinity\Bundle\TestBundle\Test\Context\FeatureContext]
+        formatter:
+            name: pretty
     extensions:
         Behat\MinkExtension:
             base_url: 'http://localhost'
