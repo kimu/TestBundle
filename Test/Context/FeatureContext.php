@@ -12,7 +12,7 @@ use Behat\MinkExtension\Context\MinkContext,
 //use Behat\CommonContexts\MinkExtraContext,
 //    Behat\CommonContexts\MinkRedirectContext,
 //    Behat\CommonContexts\SymfonyMailerContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
 use Symfony\Component\Finder\Finder;
@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Features context.
  */
-class FeatureContext extends RawMinkContext implements KernelAwareInterface
+class FeatureContext extends RawMinkContext implements KernelAwareContext
 {
     /**
      * @var KernelInterface
