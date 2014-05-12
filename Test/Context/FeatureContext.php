@@ -33,17 +33,15 @@ class FeatureContext extends RawMinkContext implements KernelAwareContext
     /**
      * Initializes context.
      * Every scenario gets its own context object.
-     *
-     * @param array $parameters context parameters (set them up through behat.yml)
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
         $this->useContext('mink', new MinkContext);
 
         // Removed until common context is upgrade to behat 3.0
-//        $this->useContext('mink_extra', new MinkExtraContext());
-//        $this->useContext('mink_redirect', new MinkRedirectContext());
-//        $this->useContext('symfony_mailer', new SymfonyMailerContext());
+        //$this->useContext('mink_extra', new MinkExtraContext());
+        //$this->useContext('mink_redirect', new MinkRedirectContext());
+        //$this->useContext('symfony_mailer', new SymfonyMailerContext());
 
         // Loads all php files under features/bootstrap iterating nested folder
         $finder = new Finder();
@@ -51,7 +49,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareContext
         foreach ($finder as $file) {
             require_once ($file->getRealPath());
             $class = $file->getBasename('.php');
-            $this->useContext($class, new $class($parameters));
+            $this->useContext($class, new $class());
         }
     }
 
