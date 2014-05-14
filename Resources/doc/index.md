@@ -171,7 +171,7 @@ It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `sourc
 
 ### Behat base context
 Infinity Test Bundle provides a basic context `Infinity\Bundle\TestBundle\Test\Context\BaseContext` that can be extended in your context files.   
-BaseContext take care of handling the `@db`, `@dbup` and `@dbdown` tags, handling the life cycle of the DB. All you need to do is to use one of this tag in your scenarios or steps.  
+BaseContext take care of the `@db` tag, handling the life cycle of the DB. All you need to do is to use one of this tag in your scenarios or steps.  
 BaseContext take also care of getting a screenshot if a step fails and send an email to the addresses you have written in the configuration (if any).  
 BaseContext extends RawMinkContext and implements KernelAwareContext. So extending this class you get automatically access to Mink and a kernel.
 

@@ -43,8 +43,8 @@ class BaseContext extends RawMinkContext implements KernelAwareContext
     }
 
     /**
-     * @BeforeScenario @db,@dbup
-     * @BeforeStep @db,@dbup
+     * @BeforeScenario @db
+     * @BeforeStep @db
      */
     public static function setUpDB(HookScope $scope)
     {
@@ -52,8 +52,8 @@ class BaseContext extends RawMinkContext implements KernelAwareContext
     }
 
     /**
-     * @AfterScenario @db,@dbdown
-     * @AfterStep @db,@dbdown
+     * @AfterScenario @db
+     * @AfterStep @db
      */
     public static function tearDownDB(HookScope $scope)
     {
