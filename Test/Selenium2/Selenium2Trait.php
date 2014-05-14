@@ -10,6 +10,7 @@ use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
  *
  * This trait can be used by any phpunit TestCase that extends MinkTestCase and uses Selenium2 as Driver.
  * Provides a few useful methods to integrate in your TestCase.
+ * You need to extend MinkTextCase in order to use this Trait, or you have to provide a getKernel method.
  */
 trait Selenium2Trait
 {

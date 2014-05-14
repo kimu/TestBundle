@@ -1,19 +1,17 @@
 default:
-  suites:
-    default:
-        path: %paths.base%/features
-        contexts: [Infinity\Bundle\TestBundle\Test\Context\FeatureContext]
-        formatter:
-            name: pretty
+    suites:
+        default:
+            paths:    [ %paths.base%/features ]
+            contexts:
+                - FeatureContext
+                - Behat\MinkExtension\Context\MinkContext
     extensions:
         Behat\MinkExtension:
             base_url: 'http://localhost'
             sessions:
                 default:
-                    goutte: ~
+                    goutte:    ~
                 javascript:
-                  selenium2: ~
-            default_session: goutte
-            javascript_session: selenium2
+                    selenium2: ~
             browser_name: firefox
         Behat\Symfony2Extension: ~
