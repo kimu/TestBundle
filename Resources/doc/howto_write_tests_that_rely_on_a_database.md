@@ -23,7 +23,9 @@ doctrine:
 
 ## Behat and DB
 
-If you need a DB just add the tag `@db` to you scenarios (works only for scenarios). TestBundle will take care of creating a DB before running the scenario and eventually drop it after the scenario has run.
+There are tree tags that can be used with Behat features to create or delete a db. All tags are usable with scenarios or steps.
+`@db` or `@dbup` are used to setup a DB. `@db` and `@dbdown` are used to delete a DB.
+If a scenario or a step is tagged with `@db` the DB is first created and then deleted. If you need just to create or clean the DB `@dbup` can be used. If you need only to delete the DB `@dbdown` can be used.
 
 You can use what you find more comfortable to you to create data in DB. You can access Doctrine implementing the `KernelAwareInterface` in you Context class.
 

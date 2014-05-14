@@ -3,7 +3,8 @@
 The aim of the Infinity Test Bundle is to provide a ready to use testing environment based on Behat, Mink, Phpspec and Selenium.
 
 ## Install the bundle
-<hr />
+
+---
  Infinity Test Bundle requires `Xvfb` and `Selenium2` to be installed in the system before installing the bundle.
  In order to install `Selenium2` and `Xvfb` in you system run 
  
@@ -11,9 +12,9 @@ The aim of the Infinity Test Bundle is to provide a ready to use testing environ
 yum install selenium
 ```
 
- in a terminal before using this bundle.
- <hr />
-
+ in a terminal before install this bundle.
+ 
+---
 Add a few lines in your composer.json to install the bundle
 
 ```json
@@ -26,23 +27,18 @@ Add a few lines in your composer.json to install the bundle
         "post-install-cmd": [
       		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles",
       		...
-      		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat"
         ],
         "post-update-cmd": [
       		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::installConfigurationFiles",
       		...
-      		"Infinity\\Bundle\\TestBundle\\Composer\\ScriptHandler::initBehat"
         ]
     },
 }
 ```
 
-The first post install script installs behat.yml.dist and phpspec.yml.dist under your `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
-The second post install script initialises Behat for you and remove FeatureContext.php because Behat is configured to use `Infinity\Bundle\TestBundle\Test\Context\FeatureContext` class as default main context.
+The post install script installs behat.yml.dist and phpspec.yml.dist under your `app/config` folder. Take a look to this document [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md) to see how you can manage these file.  
 
-
-The order of the two scripts is important. The first script must be the first script in the list and must be before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).  
-The second script must be the last script in the list.
+The position of the script is important, it must be before the Incenteev\ParameterHandler ScriptHandler, if you're using it as suggested in [Strategy to manage behat and phpspec yml config files](howto_manage_behat_and_phpspec_config.md).  
 
 Finally, install the bundle typing this in a terminal
 
@@ -50,7 +46,7 @@ Finally, install the bundle typing this in a terminal
 ./composer.phar update infinitytracking/test-bundle
 ```
 
-The Test Bundle will install Behat, Phpspec, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
+The Test Bundle will install Behat, Phpspec, PHPUnit, Mink, Goutte and Selenium2 drivers and the Behat Symfony2 extension as dependencies.
 
 Register the bundle in AppKernel.php
 
@@ -104,12 +100,16 @@ extensions:
         base_url: 'http://url.to.my.dev.container/app_test.php'
 ```
 
+Of course, you might want a more complex suites structure for your tests. In that case make all the required changes in behat.yml.dist and then copy them in behat.yml. Writing all basic configuration in behat.yml.dist is important to share them with the rest of the team, as behat.yml should be ignored by Git.  
+
+Once you're happy with your configuraton you can run `behat --init` to create the folder and file structure.
+
 ### Configuring services substitutions
 
 The Infinity Test Bundle allows to replace services in the test environment. This can be very useful to replace elements that cannot be
 mocked and cannot be used directly as they are.
 The bundle allows to replace them with classes that emulates the original class without the dependencies that make it
-impossible to use it in your tests.
+impossible to use them in your tests.
 
 The `substitutions` key in the configuration of the bundle is used to list all service to replace.
 
@@ -132,7 +132,7 @@ substitutions:
 
 ### Configuring recipients
 
-When an error occours the bundle try to send an email with a screenshot attached (implemented only for behat tests at the time of writing).   
+When an error occours the bundle try to send an email with a screenshot attached.   
 You can specify the email address of the recipients using the `recipients` key in the bundle configuration
 
 ```yaml
@@ -152,8 +152,15 @@ infinity_test:
          - myemail@example.com
 ```
 
-## Utilities
-The Infinity Test Bundle installs 3 files under the bin folder of your project.    
+## What the bundle provides
+The bundle take care of installing of the basic tools you might need to create behavioural, functional and unit tests.
+
+It provides basic configuration files for Behat and Phpspec that you can then modify as your need.
+
+But it provides also more...
+
+### Utilities
+Infinity Test Bundle installs 3 files under the bin folder of your project.    
 Files are:
 
 * `start_selenium.sh` which starts Xvfb and Selenium2
@@ -162,7 +169,24 @@ Files are:
 
 It's important that you launch `run_test.sh` using `. bin/run_test.sh` or `source bin/run_test.sh` otherwise part of what the script does won't be correctly executed.
 
-<hr />
+### Behat base context
+Infinity Test Bundle provides a basic context `Infinity\Bundle\TestBundle\Test\Context\BaseContext` that can be extended in your context files.   
+BaseContext take care of handling the `@db`, `@dbup` and `@dbdown` tags, handling the life cycle of the DB. All you need to do is to use one of this tag in your scenarios or steps.  
+BaseContext take also care of getting a screenshot if a step fails and send an email to the addresses you have written in the configuration (if any).  
+BaseContext extends RawMinkContext and implements KernelAwareContext. So extending this class you get automatically access to Mink and a kernel.
+
+###Helpers
+Infinity Test Bundle includes to helper classes `Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper` and `Infinity\Bundle\TestBundle\Test\Helper\ScreeshotHelper` that can be used to implement those functionalities directly in your PHPUnit and Behat tests.
+
+###Traits
+Infinity Test Bundle includes also two traits. The first one `Infinity\Bundle\TestBundle\Test\Doctrine\DoctrineTrait` can be used in Behat and PHPUnit to handle the DB lifecycle.  
+The second one `Infinity\Bundle\TestBundle\Test\Doctrine\ScreenshotHelper` can be used with PHPUnit to get screenshots on failure if and only if `selenium2` is the driver used by Mink.
+
+###PHPUnit base test case
+Infinity User Bundle includes also two test case to be used with PHPUnit. The fist one `Infinity\Bundle\TestBundle\Test\BaseTestCase` handle the "get screenshot on failure  feature and can be extended directly in your test cases.   
+The second one `Infinity\Bundle\TestBundle\Test\DBTestCase` extends `BaseTestCase`, thus it offers the same functionalities in addition to the ability to handle the DB lifecyle using the `setUp` and `teardown` phpunit hooks to create and delete the DB.
+
+---
 # Further readings
 [Howto create phpsepc tests](howto_create_phpspec_tests.md)   
 [Testing with a DB](howto_write_tests_that_rely_on_a_database.md)   
