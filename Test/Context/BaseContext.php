@@ -11,12 +11,7 @@ use Behat\Behat\Hook\Scope\AfterStepScope;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Infinity\Bundle\TestBundle\Test\Doctrine\DoctrineTrait;
 use Infinity\Bundle\TestBundle\Test\Helper\ScreenshotHelper;
-
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'src/Framework/Assert/Functions.php';
-//
+use Behat\Mink\Driver\Selenium2Driver;
 
 /**
  * Base Features context.
@@ -39,7 +34,7 @@ class BaseContext extends RawMinkContext implements KernelAwareContext
     {
         // TestResult::FAILED is the exit code for failing steps && We can get a screenshot only if Selenium2 is used && we have recipients
         if (TestResult::FAILED === $scope->getTestResult()->getResultCode() &&
-            $this->getSession()->getDriver() instanceof \Behat\Mink\Driver\Selenium2Driver &&
+            $this->getSession()->getDriver() instanceof Selenium2Driver::class &&
             $this->getKernel()->getContainer()->hasParameter('infinity_test.recipients')
         ) {
             $helper = new ScreenshotHelper($this->getKernel());
