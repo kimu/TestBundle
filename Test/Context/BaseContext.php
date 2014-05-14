@@ -34,7 +34,7 @@ class BaseContext extends RawMinkContext implements KernelAwareContext
     {
         // TestResult::FAILED is the exit code for failing steps && We can get a screenshot only if Selenium2 is used && we have recipients
         if (TestResult::FAILED === $scope->getTestResult()->getResultCode() &&
-            $this->getSession()->getDriver() instanceof Selenium2Driver::class &&
+            $this->getSession()->getDriver() instanceof Selenium2Driver &&
             $this->getKernel()->getContainer()->hasParameter('infinity_test.recipients')
         ) {
             $helper = new ScreenshotHelper($this->getKernel());
