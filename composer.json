@@ -21,7 +21,7 @@
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*",
         "behat/symfony2-extension": "~2.0@dev",
-        "behat/mink-bundle": "*",
+        "behat/mink-bundle": "dev-master",
         "phpspec/phpspec": "2.0.*@dev",
         "phpunit/phpunit": "~4.1"
     },
@@ -30,7 +30,6 @@
             "Infinity\\Bundle\\TestBundle": ""
         }
     },
-    "minimum-stability": "dev",
     "target-dir": "Infinity/Bundle/TestBundle",
     "bin": ["bin/start_selenium.sh", "bin/stop_selenium.sh", "bin/run_tests.sh"]
 }
