@@ -10,18 +10,19 @@ use Infinity\Bundle\TestBundle\Test\Helper\DatabaseHelper;
  *
  * This trait can be used by any phpunit TestCase that needs a database.
  * Provides a few useful methods to integrate in your TestCase for setting up ad dropping database instances.
+ * You need to extend MinkTextCase in order to use this Trait, or you have to provide a getKernel method.
  */
 trait DoctrineTrait
 {
-    public function setUpDatabase()
+    public static function setUpDatabase()
     {
-        $helper = new DatabaseHelper($this->getKernel());
+        $helper = new DatabaseHelper(static::getKernel());
         $helper->setUpDatabase();
     }
 
-    public function tearDownDatabase()
+    public static function tearDownDatabase()
     {
-        $helper = new DatabaseHelper($this->getKernel());
+        $helper = new DatabaseHelper(static::getKernel());
         $helper->tearDownDatabase();
     }
 }

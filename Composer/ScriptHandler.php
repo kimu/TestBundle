@@ -24,27 +24,4 @@ class ScriptHandler
             copy(__DIR__.'/../Test/config/phpspec.yml.dist', $appDir.'/config/phpspec.yml.dist');
         }
     }
-
-    public static function initBehat(Event $event)
-    {
-        // Init behat if it hasn't been already
-        if (!is_dir('features')) {
-            // check if behat has been correctly installed
-            if (is_file('bin/behat')) {
-                system('bin/behat --init');
-                //Check that everything is correct before removing FeatureContext.php
-                if (is_dir('features') && is_dir('features/bootstrap')) {
-                    unlink('features/bootstrap/FeatureContext.php');
-                } else {
-                    echo 'Initialization of Behat failed'.PHP_EOL;
-
-                    return;
-                }
-            } else {
-                echo 'Behat has not been found in '.getcwd().'/bin/behat, can not initialize Behat'.PHP_EOL;
-
-                return;
-            }
-        }
-    }
 }

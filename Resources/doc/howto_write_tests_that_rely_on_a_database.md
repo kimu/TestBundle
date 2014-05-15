@@ -23,7 +23,8 @@ doctrine:
 
 ## Behat and DB
 
-If you need a DB just add the tag `@db` to you scenarios (works only for scenarios). TestBundle will take care of creating a DB before running the scenario and eventually drop it after the scenario has run.
+There is one tag `@db` that can be used with Behat features to create and delete a db, usable both with scenarios or steps.
+If a scenario or a step is tagged with `@db` the DB is first created and then deleted, ritght after the scenario or the step.
 
 You can use what you find more comfortable to you to create data in DB. You can access Doctrine implementing the `KernelAwareInterface` in you Context class.
 
@@ -51,8 +52,8 @@ class MyTestCase extends MinkTestCase
     */
     public static function setUpDatabase()
     {
-        // Error suppresion is used to suppress the warning thrown because getKernel is not a static function 
-        $helper = new DatabaseHelper(@self::getKernel());
+
+ 	  $helper = new DatabaseHelper(static::getKernel());
         $helper->setUpDatabase();
     }
 
@@ -61,28 +62,8 @@ class MyTestCase extends MinkTestCase
     */ 
     public static function tearDownDatabase() 
     {
-        $helper = new DatabaseHelper(@self::getKernel());
+        $helper = new DatabaseHelper(static::getKernel());
         $helper->tearDownDatabase();
-        parent::tearDownAfterClass();		
     }
 }	
 ```
-
-As you can notice the above methods use error suppression to suppress the warning thrown because MinkTestCase::getKernel is not a static function.   
-A method to avoid it is to crete a static method that does the same operation of `getKernel`, but allows you to call it without error suppression.
-
-```php
-public static function getStaticKernel()
-{
-    if (null === static::$kernel) {
-        static::$kernel = static::createKernel();
-    }
-    if (!static::$kernel->getContainer()) {
-        static::$kernel->boot();
-    }
-    return static::$kernel;
-}
-
-```
-
-Now you can call `self::getStaticKernel()` instead of `self::getKernel()` and avoid error suppression.

@@ -1,18 +1,17 @@
 default:
-    paths:
-        features: features
-        bootstrap: %behat.paths.features%/bootstrap
-    context:
-        class: Infinity\Bundle\TestBundle\Test\Context\FeatureContext
-    formatter:
-        name: pretty
+    suites:
+        default:
+            paths:    [ %paths.base%/features ]
+            contexts:
+                - FeatureContext
+                - Behat\MinkExtension\Context\MinkContext
     extensions:
-        Behat\MinkExtension\Extension:
+        Behat\MinkExtension:
             base_url: 'http://localhost'
-            goutte:    ~
-            selenium2: ~
-            default_session: goutte
-            javascript_session: selenium2
+            sessions:
+                default:
+                    goutte:    ~
+                javascript:
+                    selenium2: ~
             browser_name: firefox
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
+        Behat\Symfony2Extension: ~
