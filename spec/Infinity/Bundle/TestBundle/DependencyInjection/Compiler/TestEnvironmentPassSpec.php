@@ -18,7 +18,7 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
 
-        $containerBuilder->has('infinity_test.substitutions')->shouldBeCalled();
+        $containerBuilder->hasParameter('infinity_test.substitutions')->shouldBeCalled();
 
         $this->process($containerBuilder);
     }
@@ -27,7 +27,7 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('prod');
 
-        $containerBuilder->has('infinity_test.substitutions')->shouldNotBeCalled();
+        $containerBuilder->hasParameter('infinity_test.substitutions')->shouldNotBeCalled();
 
         $this->process($containerBuilder);
     }
@@ -35,8 +35,8 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     function it_should_not_replace_services_if_substitutions_is_empty(ContainerBuilder $containerBuilder)
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
-        $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
-        $containerBuilder->get('infinity_test.substitutions')->willReturn([]);
+        $containerBuilder->hasParameter('infinity_test.substitutions')->willReturn(true);
+        $containerBuilder->getParameter('infinity_test.substitutions')->willReturn([]);
 
         $containerBuilder->hasDefinition(Argument::any())->shouldNotBeCalled();
 
@@ -46,8 +46,8 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     function it_should_replace_services_if_substitutions_is_not_empty_and_services_are_existing(ContainerBuilder $containerBuilder, Definition $service1Definition)
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
-        $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
-        $containerBuilder->get('infinity_test.substitutions')->willReturn([['service1' => ['class' => 'a\namespaced\class', 'inherit_arguments' => true]]]);
+        $containerBuilder->hasParameter('infinity_test.substitutions')->willReturn(true);
+        $containerBuilder->getParameter('infinity_test.substitutions')->willReturn(['service1' => ['class' => 'a\namespaced\class', 'inherit_arguments' => true]]);
         $containerBuilder->hasDefinition('service1')->willReturn(true);
         $containerBuilder->getDefinition('service1')->willReturn($service1Definition);
         $service1Definition->setClass('a\namespaced\class')->willReturn($this);
@@ -60,8 +60,8 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     function it_should_not_replace_services_if_services_are_not_existing(ContainerBuilder $containerBuilder)
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
-        $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
-        $containerBuilder->get('infinity_test.substitutions')->willReturn([['notExistingService1' => ['class' => 'a\namespaced\class', 'inherit_arguments' => true]]]);
+        $containerBuilder->hasParameter('infinity_test.substitutions')->willReturn(true);
+        $containerBuilder->getParameter('infinity_test.substitutions')->willReturn(['notExistingService1' => ['class' => 'a\namespaced\class', 'inherit_arguments' => true]]);
         $containerBuilder->hasDefinition('notExistingService1')->willReturn(false);
         $containerBuilder->getDefinition(Argument::any())->shouldNotBeCalled();
 
@@ -71,15 +71,15 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     function it_should_replace_class_names_correctly(ContainerBuilder $containerBuilder, Definition $service1Def, Definition $service2Def, Definition $service3Def, Definition $service4Def)
     {
         $services = [
-            ['service1' => ['class' => 'a/wrong/namespaced/class', 'inherit_arguments' => true]],
-            ['service2' => ['class' => 'another//wrong//namespaced//class', 'inherit_arguments' => true]],
-            ['service3' => ['class' => 'an\unescaped\namespaced\class', 'inherit_arguments' => true]],
-            ['service4' => ['class' => 'an\\escaped\\namespaced\\class', 'inherit_arguments' => true]]
+            'service1' => ['class' => 'a/wrong/namespaced/class', 'inherit_arguments' => true],
+            'service2' => ['class' => 'another//wrong//namespaced//class', 'inherit_arguments' => true],
+            'service3' => ['class' => 'an\unescaped\namespaced\class', 'inherit_arguments' => true],
+            'service4' => ['class' => 'an\\escaped\\namespaced\\class', 'inherit_arguments' => true]
         ];
 
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
-        $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
-        $containerBuilder->get('infinity_test.substitutions')->willReturn($services);
+        $containerBuilder->hasParameter('infinity_test.substitutions')->willReturn(true);
+        $containerBuilder->getParameter('infinity_test.substitutions')->willReturn($services);
 
         // Service1
         $containerBuilder->hasDefinition('service1')->willReturn(true);
@@ -111,8 +111,8 @@ class TestEnvironmentPassSpec extends ObjectBehavior
     function it_should_remove_arguments_if_inherit_arguments_is_false(ContainerBuilder $containerBuilder, Definition $serviceDefinition)
     {
         $containerBuilder->getParameter('kernel.environment')->willReturn('test');
-        $containerBuilder->has('infinity_test.substitutions')->willReturn(true);
-        $containerBuilder->get('infinity_test.substitutions')->willReturn([['service' => ['class' => 'a\namespaced\class', 'inherit_arguments' => false]]]);
+        $containerBuilder->hasParameter('infinity_test.substitutions')->willReturn(true);
+        $containerBuilder->getParameter('infinity_test.substitutions')->willReturn(['service' => ['class' => 'a\namespaced\class', 'inherit_arguments' => false]]);
         $containerBuilder->hasDefinition('service')->willReturn(true);
         $containerBuilder->getDefinition('service')->willReturn($serviceDefinition);
         $serviceDefinition->setClass('a\namespaced\class')->willReturn($serviceDefinition);
