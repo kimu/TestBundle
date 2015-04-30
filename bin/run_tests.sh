@@ -14,6 +14,7 @@ HTTPPROXY=$http_proxy
 unset https_proxy ;
 unset http_proxy ;
 php -d memory_limit=256M app/console cache:clear --env=test ;
+rm -rf app/logs/* ;
 chmod -R 0777 app/cache app/logs ;
 bin/stop_selenium.sh ;
 bin/start_selenium.sh &&
