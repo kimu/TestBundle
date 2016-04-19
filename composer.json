@@ -14,15 +14,8 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "symfony/symfony": "~2.4",
-        "behat/behat": "3.0.*@dev",
-        "behat/mink": "~1.5.0",
-        "behat/mink-extension": "~2.0@dev",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*",
-        "behat/symfony2-extension": "~2.0@dev",
-        "behat/mink-bundle": "dev-master",
-        "phpspec/phpspec": "dev-master",
+        "symfony/symfony": ">=2.4",
+        "phpspec/phpspec": "2.5.*@dev",
         "phpunit/phpunit": "~4.1"
     },
     "autoload": {
