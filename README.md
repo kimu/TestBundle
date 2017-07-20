@@ -9,5 +9,7 @@ If you find this bundle useful for any of your needs feel free to fork it. In th
 
 Infinity Tracking TestBundle provides all the packages, configuration files and utilities to write and run behavioural, web acceptance, functional and unit tests in your Infinity Tracking Symfony2 projects using Behat, PHPUnit, Phpspec, Mink and Selenium2.
 
-Please, read the documentations for further information  
+This release is for use with Symfony 3.3 and above. For older Symfony versions, please use the v0.4.0 tag.
+
+Please, read the documentations for further information
 [doc/index.md](Resources/doc/index.md)
