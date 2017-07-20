@@ -18,7 +18,7 @@ class InfinityTestExtensionSpec extends ObjectBehavior
         $configs = [['substitutions' => []]];
 
         // Called when services are loaded
-        $containerBuilder->addResource(Argument::any())->shouldBeCalled();
+        $containerBuilder->fileExists(Argument::any())->shouldBeCalled();
 
         // Assign the substitutions array to the container
         $containerBuilder->setParameter('infinity_test.substitutions', [])->shouldBeCalled();
@@ -32,7 +32,7 @@ class InfinityTestExtensionSpec extends ObjectBehavior
         $configs = [];
 
         // Called when services are loaded
-        $containerBuilder->addResource(Argument::any())->shouldBeCalled();
+        $containerBuilder->fileExists(Argument::any())->shouldBeCalled();
 
         // Assign the substitutions array to the container
         $containerBuilder->setParameter('infinity_test.substitutions', [])->shouldBeCalled();
