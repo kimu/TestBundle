@@ -16,7 +16,7 @@
         "php": ">=5.4.0",
         "symfony/symfony": "~3.3",
         "phpspec/phpspec": "2.5.*@dev",
-        "phpunit/phpunit": "~4.1"
+        "phpunit/phpunit": "~5.7.0"
     },
     "conflict": {
         "symfony/symfony": "<3.3.0"
