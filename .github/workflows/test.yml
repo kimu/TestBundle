@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: infinitytracking/workflows/.github/workflows/php-tests.yml@ic-dos-2700-add-skip-phpunit-tests-input
+    uses: infinitytracking/workflows/.github/workflows/php-tests.yml@v0.1
     with:
       working-directory: "testbundle"
       dependencies-to-checkout: ""
