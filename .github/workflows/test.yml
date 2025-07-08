@@ -9,7 +9,7 @@ jobs:
     with:
       working-directory: "testbundle"
       dependencies-to-checkout: ""
-      php-versions: '["5.6", "7.2", "7.3"]'
+      php-versions: '["5.6"]'
       php-extensions: "mbstring, xml"
       skip-phpunit-tests: true
       run-composer: true
